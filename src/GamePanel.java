@@ -21,17 +21,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer timer;
 	Font titleFont;
 	Font titleFont2;
-	
-  
-    public static BufferedImage alienImg;
-	public static BufferedImage rocketImg;
-	public static BufferedImage bulletImg;
+	Stickman stickman;
+
+	// public static BufferedImage alienImg;
+	// public static BufferedImage rocketImg;
+	// public static BufferedImage bulletImg;
 	GamePanel() {
 
-	
+		stickman = new Stickman(250, 700, 50, 50);
 		titleFont = new Font("Lucida Calligraphy", Font.PLAIN, 54);
 		titleFont2 = new Font("Lucida Calligraphy", Font.PLAIN, 30);
-	
 
 		timer = new Timer(1000 / 60, this);
 	}
@@ -74,38 +73,34 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 1000, 800);
+		stickman.draw(g);
 
-	
 	}
 
 	void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
-		g.fillRect(0, 0, 500, 800);
+		g.fillRect(0, 0, 1000, 800);
 
 		g.setFont(titleFont);
 		g.setColor(Color.BLACK);
-		g.drawString("GAME OVER", 85, 200);
+		g.drawString("GAME OVER", 360, 225);
 
 		g.setFont(titleFont2);
 		g.setColor(Color.BLACK);
-		g.drawString("Press BACKSPACE to Restart", 50, 425);
+		g.drawString("Press BACKSPACE to Restart", 330, 415);
 
 		g.setFont(titleFont2);
 		g.setColor(Color.BLACK);
-		
+
 	}
 
 	void updateMenuState() {
 
-	
-
 	}
 
 	void updateGameState() {
-
+stickman.update();
 	}
-	
-	
 
 	void updateEndState() {
 
@@ -113,7 +108,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 
 		if (currentState == MENU_STATE) {
 			updateMenuState();
@@ -143,23 +137,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-		//	rocket.right();
-			System.out.println("Right key");
-		}
-		else if( e.getKeyCode() == KeyEvent.VK_LEFT){
-		//	rocket.left();
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_UP){
-			//rocket.up();
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_DOWN){
-			//rocket.down();
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_SPACE){
+			stickman.rightKey = true;
 			
-
-		}
-		if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+		} 
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			stickman.leftKey = true;
+		
+		} 
+		else if (e.getKeyCode() == KeyEvent.VK_UP) {
+			stickman.upKey = true;
+		} 
+		
+		
+		if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 			currentState = MENU_STATE;
 		}
 		updateGameState();
@@ -169,6 +159,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("keyReleased");
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			stickman.leftKey = false;
+		} 
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			stickman.rightKey = false;
+			
+		} 
+	 if (e.getKeyCode() == KeyEvent.VK_UP) {
+			stickman.upKey = false;
+		}
+		
 	}
-	
+
 }
