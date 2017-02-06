@@ -6,10 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -17,6 +14,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
+	final int INSTRUCT_STATE = 3;
 	int currentState = MENU_STATE;
 	Timer timer;
 	Font titleFont;
@@ -50,6 +48,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (currentState == END_STATE) {
 			drawEndState(g);
 		}
+		if (currentState == INSTRUCT_STATE) {
+			drawInstructState(g);
+		}
 	}
 
 	void drawMenuState(Graphics g) {
@@ -71,22 +72,22 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawGameState(Graphics g) {
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, 1000, 800);
 		stickman.draw(g);
 
 	}
 
 	void drawEndState(Graphics g) {
-		g.setColor(Color.RED);
+		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 1000, 800);
 
 		g.setFont(titleFont);
-		g.setColor(Color.BLACK);
+		g.setColor(Color.RED);
 		g.drawString("GAME OVER", 360, 225);
 
 		g.setFont(titleFont2);
-		g.setColor(Color.BLACK);
+		g.setColor(Color.RED);
 		g.drawString("Press BACKSPACE to Restart", 330, 415);
 
 		g.setFont(titleFont2);
@@ -94,15 +95,28 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	}
 
+	void drawInstructState(Graphics g) {
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, 1000, 800);
+
+		g.setFont(titleFont);
+		g.setColor(Color.WHITE);
+		g.drawString("How to Play", 40, 90);
+	}
+
 	void updateMenuState() {
 
 	}
 
 	void updateGameState() {
-stickman.update();
+		stickman.update();
 	}
 
 	void updateEndState() {
+
+	}
+
+	void updateInstructState() {
 
 	}
 
@@ -115,6 +129,9 @@ stickman.update();
 			updateGameState();
 		} else if (currentState == END_STATE) {
 			updateEndState();
+		}
+		if (currentState == INSTRUCT_STATE) {
+			updateInstructState();
 		}
 		repaint();
 	}
@@ -136,19 +153,21 @@ stickman.update();
 				currentState = MENU_STATE;
 			}
 		}
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			currentState = INSTRUCT_STATE;
+
+		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			stickman.rightKey = true;
-			
-		} 
+
+		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			stickman.leftKey = true;
-		
-		} 
-		else if (e.getKeyCode() == KeyEvent.VK_UP) {
-			stickman.upKey = true;
-		} 
-		
-		
+
+		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+			stickman.upkey = true;
+		}
+
 		if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 			currentState = MENU_STATE;
 		}
@@ -161,15 +180,15 @@ stickman.update();
 		System.out.println("keyReleased");
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			stickman.leftKey = false;
-		} 
+		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			stickman.rightKey = false;
-			
-		} 
-	 if (e.getKeyCode() == KeyEvent.VK_UP) {
-			stickman.upKey = false;
+
 		}
-		
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			stickman.upkey = false;
+		}
+
 	}
 
 }
