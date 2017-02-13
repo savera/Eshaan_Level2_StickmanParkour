@@ -14,7 +14,7 @@ public class Stickman extends GameObject {
 	}
 
 	int gravity = 1;
-	int jumpPower = 36;
+	int jumpPower = 30;
 	int yVelocity = 0;
 	int ground = 725;
 	boolean rightKey;
@@ -45,6 +45,14 @@ public class Stickman extends GameObject {
 		} else {
 			jump = false;
 		}
+		if (x >= 950) {
+			// x = 1000 - width;
+			x = 950;
+
+		} else if (x <= 0) {
+			x = 0;
+			// x = 10;
+		}
 	}
 
 	void Jump() {
@@ -59,4 +67,5 @@ public class Stickman extends GameObject {
 		// g.drawImage(, x, y, width, height, null);
 
 	}
+
 }

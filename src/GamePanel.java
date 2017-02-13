@@ -59,7 +59,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		g.setFont(titleFont);
 		g.setColor(Color.MAGENTA);
-		g.drawString("Stickman Parkour", 290, 200);
+		g.drawString("Space Invaders", 290, 200);
 
 		g.setFont(titleFont2);
 		g.setColor(Color.ORANGE);
@@ -102,6 +102,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(titleFont);
 		g.setColor(Color.WHITE);
 		g.drawString("How to Play", 40, 90);
+
+		g.setFont(titleFont2);
+		g.drawString("Press the D Key to go RIGHT", 40, 150);
+		g.drawString("Press the A Key to go LEFT", 40, 210);
+		g.drawString("Press W Key to JUMP", 40, 270);
 	}
 
 	void updateMenuState() {
@@ -110,6 +115,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 		stickman.update();
+
 	}
 
 	void updateEndState() {
@@ -157,14 +163,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			currentState = INSTRUCT_STATE;
 
 		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		if (e.getKeyCode() == KeyEvent.VK_D) {
 			stickman.rightKey = true;
 
 		}
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		if (e.getKeyCode() == KeyEvent.VK_A) {
 			stickman.leftKey = true;
 
-		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+		} else if (e.getKeyCode() == KeyEvent.VK_W) {
 			stickman.upkey = true;
 		}
 
@@ -178,14 +184,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("keyReleased");
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		if (e.getKeyCode() == KeyEvent.VK_A) {
 			stickman.leftKey = false;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		if (e.getKeyCode() == KeyEvent.VK_D) {
 			stickman.rightKey = false;
 
 		}
-		if (e.getKeyCode() == KeyEvent.VK_UP) {
+		if (e.getKeyCode() == KeyEvent.VK_W) {
 			stickman.upkey = false;
 		}
 
