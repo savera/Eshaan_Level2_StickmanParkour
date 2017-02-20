@@ -6,7 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -20,15 +23,25 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont;
 	Font titleFont2;
 	Stickman stickman;
+	Falling_Blocks blocks;
 
 	// public static BufferedImage alienImg;
-	// public static BufferedImage rocketImg;
+	public static BufferedImage mainImg;
+
 	// public static BufferedImage bulletImg;
 	GamePanel() {
 
-		stickman = new Stickman(250, 700, 50, 50);
+		stickman = new Stickman(200, 700, 50, 50);
+		blocks = new Falling_Blocks(250, 729, 35, 35);
 		titleFont = new Font("Lucida Calligraphy", Font.PLAIN, 54);
 		titleFont2 = new Font("Lucida Calligraphy", Font.PLAIN, 30);
+
+		try {
+			mainImg = ImageIO.read(this.getClass().getResourceAsStream("Main.jpg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		timer = new Timer(1000 / 60, this);
 	}
@@ -75,7 +88,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, 1000, 800);
 		stickman.draw(g);
-
+		blocks.draw(g);
 	}
 
 	void drawEndState(Graphics g) {
@@ -104,9 +117,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("How to Play", 40, 90);
 
 		g.setFont(titleFont2);
-		g.drawString("Press the D Key to go RIGHT", 40, 150);
-		g.drawString("Press the A Key to go LEFT", 40, 210);
-		g.drawString("Press W Key to JUMP", 40, 270);
+		g.drawString("Press the Up Arrow Key to go RIGHT", 40, 150);
+		g.drawString("Press the Left Key to go LEFT", 40, 210);
+		g.drawString("Press Up Arrow Key to JUMP", 40, 270);
 	}
 
 	void updateMenuState() {
@@ -163,14 +176,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			currentState = INSTRUCT_STATE;
 
 		}
-		if (e.getKeyCode() == KeyEvent.VK_D) {
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			stickman.rightKey = true;
 
 		}
-		if (e.getKeyCode() == KeyEvent.VK_A) {
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			stickman.leftKey = true;
 
-		} else if (e.getKeyCode() == KeyEvent.VK_W) {
+		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 			stickman.upkey = true;
 		}
 
@@ -184,14 +197,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("keyReleased");
-		if (e.getKeyCode() == KeyEvent.VK_A) {
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			stickman.leftKey = false;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_D) {
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			stickman.rightKey = false;
 
 		}
-		if (e.getKeyCode() == KeyEvent.VK_W) {
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			stickman.upkey = false;
 		}
 

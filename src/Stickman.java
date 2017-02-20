@@ -6,7 +6,7 @@ public class Stickman extends GameObject {
 
 	Stickman(int x, int y, int height, int width) {
 		super();
-		speed = 7;
+		speed = 5;
 		this.x = x;
 		this.y = y;
 		this.height = height;
@@ -14,7 +14,7 @@ public class Stickman extends GameObject {
 	}
 
 	int gravity = 1;
-	int jumpPower = 30;
+	int jumpPower = 25;
 	int yVelocity = 0;
 	int ground = 725;
 	boolean rightKey;
@@ -45,9 +45,9 @@ public class Stickman extends GameObject {
 		} else {
 			jump = false;
 		}
-		if (x >= 950) {
+		if (x >= 960) {
 			// x = 1000 - width;
-			x = 950;
+			x = 960;
 
 		} else if (x <= 0) {
 			x = 0;
@@ -62,8 +62,9 @@ public class Stickman extends GameObject {
 	}
 
 	void draw(Graphics g) {
-		g.setColor(Color.BLUE);
-		g.fillRect(x, y, width, height);
+		g.drawImage(GamePanel.mainImg, x, y, width, height, null);
+//		g.setColor(Color.BLUE);
+//		g.fillRect(x, y, width, height);
 		// g.drawImage(, x, y, width, height, null);
 
 	}
