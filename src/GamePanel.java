@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -24,26 +25,32 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont2;
 	Stickman stickman;
 	Falling_Blocks blocks;
-
+    ObjectManager manager = new ObjectManager();
 	// public static BufferedImage alienImg;
 	public static BufferedImage mainImg;
+	// public static BufferedImage fallingImg;
 
 	// public static BufferedImage bulletImg;
 	GamePanel() {
-
+		Random random = new Random();
 		stickman = new Stickman(200, 700, 50, 50);
-		blocks = new Falling_Blocks(250, 729, 35, 35);
+		blocks = new Falling_Blocks(250, 100, 35, 35);
 		titleFont = new Font("Lucida Calligraphy", Font.PLAIN, 54);
 		titleFont2 = new Font("Lucida Calligraphy", Font.PLAIN, 30);
-
+        for (int i = 0; i < 100; i++) {
+			manager.addObject(new Falling_Blocks(random.nextInt(1000) , 100, 35,35));
+		}
 		try {
 			mainImg = ImageIO.read(this.getClass().getResourceAsStream("Main.jpg"));
+			// fallingImg =
+			// ImageIO.read(this.getClass().getResourceAsStream("falling.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		timer = new Timer(1000 / 60, this);
+		
 	}
 
 	void startGame() {
@@ -89,6 +96,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, 1000, 800);
 		stickman.draw(g);
 		blocks.draw(g);
+		manager.draw(g);
 	}
 
 	void drawEndState(Graphics g) {
@@ -128,7 +136,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 		stickman.update();
-
+		blocks.update();
+		manager.update();
 	}
 
 	void updateEndState() {

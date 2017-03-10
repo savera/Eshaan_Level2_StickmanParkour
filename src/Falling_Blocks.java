@@ -11,29 +11,35 @@ Falling_Blocks(int x, int y, int width, int height){
 	this.height = height;
 	this.width = width;
 }
+
 void update(){
 	super.update();
+	System.out.println(x +"." + y + "." );
 	y++;
 
 	 if(x <= 0){
 		left = false;
 	 }
-	if(x>= 500 - width){
+	if(x>= 0){
 		left = true;
 	}
 
 	 
 	  if(left){
-		 x = x-new Random().nextInt(5);
+		 y = y+new Random().nextInt(5);
 
 	 }
-	  else {
-			 x = x+new Random().nextInt(5);
 
+//	  else {
+//			 y = y+new Random().nextInt(5);
+//
+//	  }
+	  if(y>=730){
+		 y = 730;
 	  }
 }
-void draw(Graphics g){
+public void draw(Graphics g){
 	g.setColor(Color.black);
-g.fillRect(x, y, width, height);
+g.fillRect(x, y, width,height);
 }
 }

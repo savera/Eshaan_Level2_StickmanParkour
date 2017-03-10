@@ -61,7 +61,7 @@ public class Stickman extends GameObject {
 		}
 	}
 
-	void draw(Graphics g) {
+	public void draw(Graphics g) {
 		g.drawImage(GamePanel.mainImg, x, y, width, height, null);
 //		g.setColor(Color.BLUE);
 //		g.fillRect(x, y, width, height);
