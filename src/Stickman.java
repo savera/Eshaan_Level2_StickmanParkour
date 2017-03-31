@@ -16,14 +16,14 @@ public class Stickman extends GameObject {
 	int gravity = 1;
 	int jumpPower = 25;
 	int yVelocity = 0;
-	int ground = 725;
+	int ground = 840;
 	boolean rightKey;
 	boolean leftKey;
 	boolean upkey;
 	boolean jump;
 
 	void update() {
-
+System.out.println(x + "." + y + ".");
 		if (rightKey) {
 			// x = x + speed;
 			x += speed;
@@ -45,9 +45,9 @@ public class Stickman extends GameObject {
 		} else {
 			jump = false;
 		}
-		if (x >= 960) {
+		if (x >= 450) {
 			// x = 1000 - width;
-			x = 960;
+			x = 450;
 
 		} else if (x <= 0) {
 			x = 0;

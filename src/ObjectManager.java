@@ -44,8 +44,9 @@ public class ObjectManager {
 	}
 
 	public void manageEnemies(){
+		int enemyLane = new Random().nextInt(Stickman_Parkour.width) / 35;
 		if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
-//			addObject(new Aliens(new Random().nextInt(LeagueInvaders.width), 0, 50, 50));
+			addObject(new Falling_Blocks(enemyLane * 35, 0, 35, 35, enemyLane));
 			enemyTimer = System.currentTimeMillis();
 		}
 	}

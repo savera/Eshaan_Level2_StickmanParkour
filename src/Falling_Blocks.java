@@ -2,44 +2,46 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
-public class Falling_Blocks extends GameObject{
+public class Falling_Blocks extends GameObject {
 	boolean left = true;
-Falling_Blocks(int x, int y, int width, int height){
-	super();
-	this.x = x;
-	this.y = y;
-	this.height = height;
-	this.width = width;
-}
 
-void update(){
-	super.update();
-	System.out.println(x +"." + y + "." );
-	y++;
-
-	 if(x <= 0){
-		left = false;
-	 }
-	if(x>= 0){
-		left = true;
+	Falling_Blocks(int x, int y, int width, int height, int lane) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.height = height;
+		this.width = width;
+		this.lane = lane;
 	}
 
-	 
-	  if(left){
-		 y = y+new Random().nextInt(5);
+	void update() {
+		super.update();
+		System.out.println(x + "." + y + ".");
+		y++;
 
-	 }
+		if (x <= 0) {
+			left = false;
+		}
+		if (x >= 0) {
+			left = true;
+		}
 
-//	  else {
-//			 y = y+new Random().nextInt(5);
-//
-//	  }
-	  if(y>=730){
-		 y = 730;
-	  }
-}
-public void draw(Graphics g){
-	g.setColor(Color.black);
-g.fillRect(x, y, width,height);
-}
+		if (left) {
+			y = y + new Random().nextInt(5);
+
+		}
+
+		// else {
+		// y = y+new Random().nextInt(5);
+		//
+		// }
+		if (y >= 844) {
+			y = 844;
+		}
+	}
+
+	public void draw(Graphics g) {
+		g.setColor(Color.black);
+		g.fillRect(x, y, width, height);
+	}
 }
