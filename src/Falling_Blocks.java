@@ -31,12 +31,8 @@ public class Falling_Blocks extends GameObject {
 
 		}
 
-		// else {
-		// y = y+new Random().nextInt(5);
-		//
-		// }
-		if (y >= 844) {
-			y = 844;
+		if (y >= ObjectManager.lanes[lane]) {
+		y = ObjectManager.lanes[lane];
 		}
 	}
 
