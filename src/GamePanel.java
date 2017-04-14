@@ -28,6 +28,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     ObjectManager manager = new ObjectManager();
 	// public static BufferedImage alienImg;
 	public static BufferedImage mainImg;
+	//public static BufferedImage FallingBImg;
 	// public static BufferedImage fallingImg;
 
 	// public static BufferedImage bulletImg;
@@ -42,6 +43,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 //		}
 		try {
 			mainImg = ImageIO.read(this.getClass().getResourceAsStream("Main.jpg"));
+		//	FallingBImg = ImageIO.read(this.getClass().getResourceAsStream("FallingBlocks.jpg"));
 			// fallingImg =
 			// ImageIO.read(this.getClass().getResourceAsStream("falling.jpg"));
 		} catch (IOException e) {

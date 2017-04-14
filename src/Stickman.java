@@ -14,8 +14,8 @@ public class Stickman extends GameObject {
 	}
 
 	int gravity = 1;
-	int jumpPower = 25;
-	int yVelocity = 0;
+	int jumpPower = 13;
+	int yVelocity = 1;
 	int ground = 840;
 	boolean rightKey;
 	boolean leftKey;
@@ -23,24 +23,24 @@ public class Stickman extends GameObject {
 	boolean jump;
 
 	void update() {
-System.out.println(x + "." + y + ".");
+		System.out.println(x + "." + y + ".");
 		if (rightKey) {
 			// x = x + speed;
 			x += speed;
 			System.out.println("Right key");
-		} else if (leftKey) {
+		} if (leftKey) {
 			// x = x - speed;
 			x -= speed;
 			System.out.println("Left key");
-		} else if (upkey) {
+		}  if (upkey) {
 			Jump();
 			System.out.println("up key " + y);
-
 		}
+		
 		y -= yVelocity;
 		yVelocity -= gravity;
-		if (y > ground) {
-			y = ground;
+		if (y > 860) {
+			y = 860;
 			jump = true;
 		} else {
 			jump = false;
@@ -57,14 +57,16 @@ System.out.println(x + "." + y + ".");
 
 	void Jump() {
 		if (jump == true) {
-			yVelocity += jumpPower;
+			yVelocity = jumpPower;
 		}
+		
+		
 	}
 
 	public void draw(Graphics g) {
 		g.drawImage(GamePanel.mainImg, x, y, width, height, null);
-//		g.setColor(Color.BLUE);
-//		g.fillRect(x, y, width, height);
+		// g.setColor(Color.BLUE);
+		// g.fillRect(x, y, width, height);
 		// g.drawImage(, x, y, width, height, null);
 
 	}
