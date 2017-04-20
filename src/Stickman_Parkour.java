@@ -11,8 +11,8 @@ public class Stickman_Parkour extends JPanel implements ActionListener, KeyListe
 	GamePanel panel;
 
 	JFrame frame;
-	static int width = 1000;
-	int height = 800;
+	static int width = 490;
+	int height = 920;
 
 	Stickman_Parkour() {
 		panel = new GamePanel();
