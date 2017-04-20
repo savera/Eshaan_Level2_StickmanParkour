@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -79,20 +80,24 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 900);
 
-		//g.setFont(titleFont);
-		//g.setColor(Color.MAGENTA);
-		//g.drawString("Space Invaders", 290, 200);
+		g.setFont(titleFont);
+		g.setColor(Color.MAGENTA);
+		//g.drawString("Falling Sky", 290, 200);
+		startButton();
 
-		//g.setFont(titleFont2);
-		//g.setColor(Color.ORANGE);
-		//g.drawString("Press ENTER to Start", 350, 300);
+		g.setFont(titleFont2);
+		g.setColor(Color.ORANGE);
+		//g.drawString("Click on Start to play the game", 350, 300);
 
-		//g.setFont(titleFont2);
-		//(Color.MAGENTA);
-		//g.drawString("Press SPACE for instructions", 300, 400);
+		g.setFont(titleFont2);
+		g.setColor(Color.MAGENTA);
+		//g.drawString("Click Instructions for How To Play", 300, 400);
 
 	}
-
+void startButton(){
+	JButton button = new JButton();
+	button.setText("Start");
+}
 	void drawGameState(Graphics g) {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, 500, 900);
@@ -102,8 +107,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawEndState(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 500, 900);
+//		g.setColor(Color.BLACK);
+//		g.fillRect(0, 0, 500, 900);
 
 		//g.setFont(titleFont);
 		//g.setColor(Color.RED);
@@ -119,8 +124,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawInstructState(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 500, 900);
+//		g.setColor(Color.BLACK);
+//		g.fillRect(0, 0, 500, 900);
 
 	//	g.setFont(titleFont);
 		//g.setColor(Color.WHITE);
