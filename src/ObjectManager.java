@@ -32,7 +32,7 @@ public class ObjectManager {
 
 	public void update() {
 		for (int i = 0; i < objects.size(); i++) {
-			Falling_Blocks o = (Falling_Blocks) objects.get(i);
+			GameObject o = objects.get(i);
 			o.update();
 		}
 
@@ -42,7 +42,7 @@ public class ObjectManager {
 	public void draw(Graphics g) {
 		
 		for (int i = 0; i < objects.size(); i++) {
-			Falling_Blocks o = (Falling_Blocks) objects.get(i);
+			GameObject o =objects.get(i);
 			o.draw(g);
 		}
 	}
@@ -69,19 +69,16 @@ public class ObjectManager {
 	 for (int j = i + 1; j < objects.size(); j++) {
 	 GameObject o1 = objects.get(i);
 	 GameObject o2 = objects.get(j);
-	
+	 if(o1 instanceof Stickman){
+		 //System.out.println(o1.collisionBox);
+	 }
 	 if(o1.collisionBox.intersects(o2.collisionBox)){
 	 if((o1 instanceof Falling_Blocks && o2 instanceof Stickman) ||
 	 (o2 instanceof Falling_Blocks && o1 instanceof Stickman)){
-//	 score++;
-//	 System.out.println(score);
-//	 o1.isAlive = false;
-//	 o2.isAlive = false;
+		 System.out.println("collision");
 	 }
-	 else if((o1 instanceof Falling_Blocks && o2 instanceof Stickman) ||
-	 (o2 instanceof Falling_Blocks && o1 instanceof Stickman)){
-//	 o1.isAlive = false;
-//	 o2.isAlive = false;
+	 else if(o1 instanceof Stickman) {
+		 System.out.println("collision");
 	 }
 	
 	 }

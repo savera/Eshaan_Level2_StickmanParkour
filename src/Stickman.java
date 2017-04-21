@@ -23,11 +23,12 @@ public class Stickman extends GameObject {
 	boolean jump;
 
 	void update() {
-		System.out.println(x + "." + y + ".");
+		super.update();
+		//System.out.println(x + "." + y + ".");
 		if (rightKey) {
 			// x = x + speed;
 			x += speed;
-			System.out.println("Right key");
+			//System.out.println("Right key");
 		} if (leftKey) {
 			// x = x - speed;
 			x -= speed;
@@ -64,7 +65,7 @@ public class Stickman extends GameObject {
 	}
 
 	public void draw(Graphics g) {
-		g.drawImage(GamePanel.mainImg, x, y, width, height, null);
+		g.drawImage(GamePanel.mainImg, x, y, width + 30, height + 30, null);
 		// g.setColor(Color.BLUE);
 		// g.fillRect(x, y, width, height);
 		// g.drawImage(, x, y, width, height, null);

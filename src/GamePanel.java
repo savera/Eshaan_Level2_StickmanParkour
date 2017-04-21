@@ -12,6 +12,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -25,6 +26,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont;
 	Font titleFont2;
 	Stickman stickman;
+	JButton button;
 	//Falling_Blocks blocks;
     ObjectManager manager = new ObjectManager();
 	// public static BufferedImage alienImg;
@@ -35,7 +37,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	// public static BufferedImage bulletImg;
 	GamePanel() {
 		Random random = new Random();
-		stickman = new Stickman(200, 900, 50, 50);
+		stickman = new Stickman(200, 900, 10, 10);
+		manager.addObject(stickman);
 		//blocks = new Falling_Blocks(250, 100, 35, 35);
 		titleFont = new Font("Lucida Calligraphy", Font.PLAIN, 54);
 		titleFont2 = new Font("Lucida Calligraphy", Font.PLAIN, 30);
@@ -77,14 +80,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawMenuState(Graphics g) {
+		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 900);
 
-		g.setFont(titleFont);
-		g.setColor(Color.MAGENTA);
+		//g.setFont(titleFont);
+		//g.setColor(Color.MAGENTA);
 		//g.drawString("Falling Sky", 290, 200);
+		if(button == null){
 		startButton();
-
+		}
+		
 		g.setFont(titleFont2);
 		g.setColor(Color.ORANGE);
 		//g.drawString("Click on Start to play the game", 350, 300);
@@ -95,10 +101,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	}
 void startButton(){
-	JButton button = new JButton();
+	button = new JButton();
+	
+    add(button);
+	button.setVisible(true);
+	button.setSize(100, 100);
+	button.setBackground(Color.WHITE);
 	button.setText("Start");
+   // button.setForeground(Color.WHITE);
+    button.setOpaque(true);
 }
 	void drawGameState(Graphics g) {
+		if(button!=null){
+		remove(button);
+			button = null;
+		}
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, 500, 900);
 		stickman.draw(g);
@@ -142,8 +159,10 @@ void startButton(){
 	}
 
 	void updateGameState() {
-		stickman.update();
+		//
+		//stickman.update();
 		//blocks.update();
+		manager.checkCollision();
 		manager.update();
 		manager.manageEnemies();
 	}
