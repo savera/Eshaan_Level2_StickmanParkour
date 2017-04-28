@@ -40,15 +40,15 @@ public class Stickman extends GameObject {
 		
 		y -= yVelocity;
 		yVelocity -= gravity;
-		if (y > 860) {
-			y = 860;
+		if (y > 868) {
+			y = 868;
 			jump = true;
 		} else {
 			jump = false;
 		}
-		if (x >= 450) {
+		if (x >= 465) {
 			// x = 1000 - width;
-			x = 450;
+			x = 460;
 
 		} else if (x <= 0) {
 			x = 0;
@@ -65,7 +65,7 @@ public class Stickman extends GameObject {
 	}
 
 	public void draw(Graphics g) {
-		g.drawImage(GamePanel.mainImg, x, y, width + 30, height + 30, null);
+		g.drawImage(GamePanel.main2Img, x, y, width, height , null);
 		// g.setColor(Color.BLUE);
 		// g.fillRect(x, y, width, height);
 		// g.drawImage(, x, y, width, height, null);

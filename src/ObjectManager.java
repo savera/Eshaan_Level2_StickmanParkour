@@ -76,6 +76,7 @@ public class ObjectManager {
 	 if((o1 instanceof Falling_Blocks && o2 instanceof Stickman) ||
 	 (o2 instanceof Falling_Blocks && o1 instanceof Stickman)){
 		 System.out.println("collision");
+		System.out.println(o2.y);
 	 }
 	 else if(o1 instanceof Stickman) {
 		 System.out.println("collision");

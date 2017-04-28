@@ -30,14 +30,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	//Falling_Blocks blocks;
     ObjectManager manager = new ObjectManager();
 	// public static BufferedImage alienImg;
-	public static BufferedImage mainImg;
+	public static BufferedImage main2Img;
 	//public static BufferedImage FallingBImg;
 	// public static BufferedImage fallingImg;
 
 	// public static BufferedImage bulletImg;
 	GamePanel() {
 		Random random = new Random();
-		stickman = new Stickman(200, 900, 10, 10);
+		stickman = new Stickman(200, 900, 30, 30);
 		manager.addObject(stickman);
 		//blocks = new Falling_Blocks(250, 100, 35, 35);
 		titleFont = new Font("Lucida Calligraphy", Font.PLAIN, 54);
@@ -46,7 +46,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 //			manager.addObject(new Falling_Blocks(random.nextInt(1000) , 100, 35,35));
 //		}
 		try {
-			mainImg = ImageIO.read(this.getClass().getResourceAsStream("Main.jpg"));
+			main2Img = ImageIO.read(this.getClass().getResourceAsStream("Main2.jpg"));
 		//	FallingBImg = ImageIO.read(this.getClass().getResourceAsStream("FallingBlocks.jpg"));
 			// fallingImg =
 			// ImageIO.read(this.getClass().getResourceAsStream("falling.jpg"));

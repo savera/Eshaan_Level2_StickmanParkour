@@ -18,29 +18,29 @@ public class Falling_Blocks extends GameObject {
 
 	void update() {
 		super.update();
-		//System.out.println(x + "." + y + ".");
-if(!placed){		
-	y++;
+		// System.out.println(x + "." + y + ".");
+		if (!placed) {
+			y++;
 
-		if (x <= 0) {
-			left = false;
-		}
-		if (x >= 0) {
-			left = true;
+			if (x <= 0) {
+				left = false;
+			}
+			if (x >= 0) {
+				left = true;
+			}
+
+			if (left) {
+				y = y + new Random().nextInt(10);
+
+			}
+
+			if (y > ObjectManager.lanes[lane]) {
+				y = ObjectManager.lanes[lane];
+				placed = true;
+				ObjectManager.lanes[lane] -= height;
+			}
 		}
 
-		if (left) {
-			y = y + new Random().nextInt(10);
-
-		}
-
-		if (y > ObjectManager.lanes[lane]) {
-			y = ObjectManager.lanes[lane];
-			placed = true;
-			 ObjectManager.lanes[lane] -= height;
-		}
-}
-		
 	}
 
 	public void draw(Graphics g) {

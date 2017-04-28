@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Stickman_Parkour extends JPanel implements ActionListener, KeyListener{
+public class Stickman_Parkour extends JPanel implements ActionListener, KeyListener {
 	GamePanel panel;
 
 	JFrame frame;
@@ -19,12 +19,12 @@ public class Stickman_Parkour extends JPanel implements ActionListener, KeyListe
 		frame = new JFrame();
 		setup();
 	}
+
 	public static void main(String[] args) {
-		  new Stickman_Parkour();
-		
-		
-		
+		new Stickman_Parkour();
+
 	}
+
 	void setup() {
 		frame.add(panel);
 		frame.addKeyListener(panel);
@@ -35,24 +35,28 @@ public class Stickman_Parkour extends JPanel implements ActionListener, KeyListe
 		panel.startGame();
 
 	}
+
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
