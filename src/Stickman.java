@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class Stickman extends GameObject {
 	int speed;
@@ -40,20 +41,21 @@ public class Stickman extends GameObject {
 		
 		y -= yVelocity;
 		yVelocity -= gravity;
-		if (y > 868) {
-			y = 868;
+		if (y > 866) {
+			y = 866;
 			jump = true;
 		} else {
 			jump = false;
 		}
-		if (x >= 465) {
+		if (x >= 463) {
 			// x = 1000 - width;
-			x = 460;
+			x = 458;
 
 		} else if (x <= 0) {
 			x = 0;
 			// x = 10;
 		}
+	
 	}
 
 	void Jump() {
@@ -65,7 +67,11 @@ public class Stickman extends GameObject {
 	}
 
 	public void draw(Graphics g) {
-		g.drawImage(GamePanel.main2Img, x, y, width, height , null);
+		//g.drawImage(GamePanel.main2Img, x, y, width, height , null);
+		g.setColor(Color.BLUE);
+		((Graphics2D)g).draw(collisionBox);
+		g.setColor(Color.red);
+		((Graphics2D)g).draw(collisionBox2);
 		// g.setColor(Color.BLUE);
 		// g.fillRect(x, y, width, height);
 		// g.drawImage(, x, y, width, height, null);
