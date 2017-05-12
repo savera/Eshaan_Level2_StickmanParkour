@@ -66,14 +66,18 @@ public class ObjectManager {
 	public void checkCollision() {
 		for (int i = 0; i < objects.size(); i++) {
 			for (int j = i + 1; j < objects.size(); j++) {
-				GameObject o1 = objects.get(i);
-				GameObject o2 = objects.get(j);
+				GameObject stickman = objects.get(i);
+				GameObject fallingBlock = objects.get(j);
 
-				if (o1 instanceof Stickman) {
-					if (o1.collisionBox.intersects(o2.collisionBox)) {
-					
+				if (stickman instanceof Stickman) {
+					stickman = (Stickman)stickman;
+					if (stickman.collisionBox3.intersects(fallingBlock.collisionBox) ) {
+//						((Stickman) stickman).rightKey = false;
+//					stickman.x=(fallingBlock.lane-1) * 35;
+						stickman.x -= 6;
 						System.out.println("collision");
-						System.out.println(o2.y);
+						System.out.println(fallingBlock.y);
+						
 					}
 
 				}

@@ -72,6 +72,10 @@ public class Stickman extends GameObject {
 		((Graphics2D)g).draw(collisionBox);
 		g.setColor(Color.red);
 		((Graphics2D)g).draw(collisionBox2);
+		g.setColor(Color.CYAN);
+		((Graphics2D)g).draw(collisionBox3);
+		g.setColor(Color.ORANGE);
+		((Graphics2D)g).draw(collisionBox4);
 		// g.setColor(Color.BLUE);
 		// g.fillRect(x, y, width, height);
 		// g.drawImage(, x, y, width, height, null);
