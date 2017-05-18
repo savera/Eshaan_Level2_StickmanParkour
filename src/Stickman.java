@@ -23,6 +23,22 @@ public class Stickman extends GameObject {
 	boolean upkey;
 	boolean jump;
 
+	public int getGravity() {
+		return gravity;
+	}
+
+	public void setGravity(int gravity) {
+		this.gravity = gravity;
+	}
+
+	public int getyVelocity() {
+		return yVelocity;
+	}
+
+	public void setyVelocity(int yVelocity) {
+		this.yVelocity = yVelocity;
+	}
+
 	void update() {
 		super.update();
 		//System.out.println(x + "." + y + ".");
@@ -76,6 +92,8 @@ public class Stickman extends GameObject {
 		((Graphics2D)g).draw(collisionBox3);
 		g.setColor(Color.ORANGE);
 		((Graphics2D)g).draw(collisionBox4);
+		g.setColor(Color.MAGENTA);
+		((Graphics2D)g).draw(collisionBox5);
 		// g.setColor(Color.BLUE);
 		// g.fillRect(x, y, width, height);
 		// g.drawImage(, x, y, width, height, null);

@@ -74,12 +74,24 @@ public class ObjectManager {
 					if (stickman.collisionBox3.intersects(fallingBlock.collisionBox) ) {
 //						((Stickman) stickman).rightKey = false;
 //					stickman.x=(fallingBlock.lane-1) * 35;
-						stickman.x -= 6;
+						stickman.x -= 5;
 						System.out.println("collision");
+						//stickman.x += 5;
 						System.out.println(fallingBlock.y);
 						
 					}
-
+					if(stickman.collisionBox4.intersects(fallingBlock.collisionBox)){
+						stickman.x += 5;
+						System.out.println("COLLISION");
+					}
+					if(stickman.collisionBox.intersects(fallingBlock.collisionBox)){
+						stickman.y -= 35;
+						((Stickman) stickman).setGravity(0);
+						((Stickman) stickman).setyVelocity(0);
+					}
+					else{
+						((Stickman) stickman).setGravity(1);
+					}
 				}
 			}
 		}
