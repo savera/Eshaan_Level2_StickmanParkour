@@ -70,31 +70,40 @@ public class ObjectManager {
 				GameObject fallingBlock = objects.get(j);
 
 				if (stickman instanceof Stickman) {
-					stickman = (Stickman)stickman;
-					if (stickman.collisionBox3.intersects(fallingBlock.collisionBox) ) {
-//						((Stickman) stickman).rightKey = false;
-//					stickman.x=(fallingBlock.lane-1) * 35;
+
+					if (stickman.collisionBox.intersects(fallingBlock.collisionBox)) {
+						if (((Falling_Blocks) fallingBlock).isRed) {
+							stickman.y -= 35;
+						} else {
+
+						}
+					}
+					if (stickman.collisionBox3.intersects(fallingBlock.collisionBox)) {
 						stickman.x -= 5;
 						System.out.println("collision");
-						//stickman.x += 5;
+						// stickman.x += 5;
 						System.out.println(fallingBlock.y);
-						
+
 					}
-					if(stickman.collisionBox4.intersects(fallingBlock.collisionBox)){
+					if (stickman.collisionBox4.intersects(fallingBlock.collisionBox)) {
 						stickman.x += 5;
 						System.out.println("COLLISION");
 					}
-					if (stickman.collisionBox6.intersects(fallingBlock.collisionBox)) {
-						((Stickman) stickman).setyVelocity(5);
+					// if
+					// (stickman.collisionBox6.intersects(fallingBlock.collisionBox))
+					// {
+					// ((Stickman) stickman).setyVelocity(5);
+					// }
+					// else
+					// if(stickman.collisionBox5.intersects(fallingBlock.collisionBox)){
+					// //stickman.y -= 35;
+					// ((Stickman) stickman).onGround = true;
+					//
+					// }
+					else {
+						// ((Stickman) stickman).onGround = false;
+						// ((Stickman) stickman).setGravity(1);
 					}
-					else if(stickman.collisionBox5.intersects(fallingBlock.collisionBox)){
-						stickman.y -= 35;
-						//((Stickman) stickman).setGravity(0);
-						//((Stickman) stickman).setyVelocity(0);
-					}
-//					else{
-//						((Stickman) stickman).setGravity(1);
-//					}
 				}
 			}
 		}

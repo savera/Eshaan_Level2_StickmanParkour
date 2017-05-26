@@ -5,7 +5,7 @@ import java.util.Random;
 public class Falling_Blocks extends GameObject {
 	boolean left = true;
 	boolean placed = false;
-
+	boolean isRed;
 	Falling_Blocks(int x, int y, int width, int height, int lane) {
 		super();
 		this.x = x;
@@ -13,7 +13,13 @@ public class Falling_Blocks extends GameObject {
 		this.height = height;
 		this.width = width;
 		this.lane = lane;
-
+       if(Math.random() > 0.9){
+    	   isRed = true;
+       }
+       else{
+    	   isRed = false;
+    	  
+       }
 	}
 
 	void update() {
@@ -44,7 +50,13 @@ public class Falling_Blocks extends GameObject {
 	}
 
 	public void draw(Graphics g) {
-		g.setColor(Color.GRAY);
+
+		if(isRed){
+			g.setColor(Color.RED);
+		}
+		else{
+			g.setColor(Color.GRAY);
+		}
 		g.fillRect(x, y, width, height);
 	}
 }

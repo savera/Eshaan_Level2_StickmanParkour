@@ -14,7 +14,7 @@ public class Stickman extends GameObject {
 		this.width = width;
 	}
 
-	int gravity = 1;
+	//int gravity = 0;
 	int jumpPower = 13;
 	int yVelocity = 1;
 	int ground = 840;
@@ -22,14 +22,14 @@ public class Stickman extends GameObject {
 	boolean leftKey;
 	boolean upkey;
 	boolean jump;
+	boolean onGround = true;
+	//public int getGravity() {
+		//return gravity;
+	//}
 
-	public int getGravity() {
-		return gravity;
-	}
-
-	public void setGravity(int gravity) {
-		this.gravity = gravity;
-	}
+//	public void setGravity(int gravity) {
+//		this.gravity = gravity;
+//	}
 
 	public int getyVelocity() {
 		return yVelocity;
@@ -41,24 +41,29 @@ public class Stickman extends GameObject {
 
 	void update() {
 		super.update();
-		//System.out.println(x + "." + y + ".");
+		// System.out.println(x + "." + y + ".");
 		if (rightKey) {
 			// x = x + speed;
 			x += speed;
-			//System.out.println("Right key");
-		} if (leftKey) {
+			// System.out.println("Right key");
+		}
+		if (leftKey) {
 			// x = x - speed;
 			x -= speed;
 			System.out.println("Left key");
-		}  if (upkey) {
+		}
+		if (upkey) {
 			Jump();
 			System.out.println("up key " + y);
 		}
-		
+
 		y -= yVelocity;
-		yVelocity -= gravity;
-		if (y > 866) {
+		//yVelocity -= gravity;
+		if (y > 856|| onGround ) {
+			
 			y = 866;
+			//setGravity(0);
+			setyVelocity(0);
 			jump = true;
 		} else {
 			jump = false;
@@ -71,31 +76,31 @@ public class Stickman extends GameObject {
 			x = 0;
 			// x = 10;
 		}
-	
+
 	}
 
 	void Jump() {
 		if (jump == true) {
 			yVelocity = jumpPower;
+			onGround = false;
 		}
-		
-		
+
 	}
 
 	public void draw(Graphics g) {
-		//g.drawImage(GamePanel.main2Img, x, y, width, height , null);
+		// g.drawImage(GamePanel.main2Img, x, y, width, height , null);
 		g.setColor(Color.BLUE);
-		((Graphics2D)g).draw(collisionBox);
+		((Graphics2D) g).draw(collisionBox);
 		g.setColor(Color.red);
-		((Graphics2D)g).draw(collisionBox2);
+		((Graphics2D) g).draw(collisionBox2);
 		g.setColor(Color.CYAN);
-		((Graphics2D)g).draw(collisionBox3);
+		((Graphics2D) g).draw(collisionBox3);
 		g.setColor(Color.ORANGE);
-		((Graphics2D)g).draw(collisionBox4);
+		((Graphics2D) g).draw(collisionBox4);
 		g.setColor(Color.MAGENTA);
-		((Graphics2D)g).draw(collisionBox5);
+		((Graphics2D) g).draw(collisionBox5);
 		g.setColor(Color.PINK);
-		((Graphics2D)g).draw(collisionBox6);
+		((Graphics2D) g).draw(collisionBox6);
 		// g.setColor(Color.BLUE);
 		// g.fillRect(x, y, width, height);
 		// g.drawImage(, x, y, width, height, null);

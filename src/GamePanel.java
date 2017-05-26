@@ -218,10 +218,10 @@ void startButton(){
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			stickman.leftKey = true;
-
-		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
-			stickman.upkey = true;
 		}
+//		 else if (e.getKeyCode() == KeyEvent.VK_UP) {
+//			stickman.upkey = true;
+//		}
 
 		if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 			currentState = MENU_STATE;
@@ -240,9 +240,9 @@ void startButton(){
 			stickman.rightKey = false;
 
 		}
-		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			stickman.upkey = false;
-		}
+//		if (e.getKeyCode() == KeyEvent.VK_UP) {
+//			stickman.upkey = false;
+//		}
 
 	}
 
