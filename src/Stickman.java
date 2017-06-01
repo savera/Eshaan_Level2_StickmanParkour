@@ -57,17 +57,17 @@ public class Stickman extends GameObject {
 			System.out.println("up key " + y);
 		}
 
-		y -= yVelocity;
+		//y -= yVelocity;
 		//yVelocity -= gravity;
-		if (y > 856|| onGround ) {
-			
-			y = 866;
-			//setGravity(0);
-			setyVelocity(0);
-			jump = true;
-		} else {
-			jump = false;
-		}
+//		if (y > 856|| onGround ) {
+//			
+//			y = 866;
+//			//setGravity(0);
+//			setyVelocity(0);
+//			jump = true;
+//		} else {
+//			jump = false;
+//		}
 		if (x >= 463) {
 			// x = 1000 - width;
 			x = 458;

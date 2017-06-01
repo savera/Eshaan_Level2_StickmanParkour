@@ -73,22 +73,42 @@ public class ObjectManager {
 
 					if (stickman.collisionBox.intersects(fallingBlock.collisionBox)) {
 						if (((Falling_Blocks) fallingBlock).isRed) {
-							stickman.y -= 35;
+							stickman.y -= 45;
+							((Falling_Blocks) fallingBlock).isRed = false;
+						} else {
+
+						}
+					}
+					if ((stickman.collisionBox.intersects(fallingBlock.collisionBox))) {
+						if (((Falling_Blocks) fallingBlock).isBlue) {
+							stickman.y -= 45;
+							((Stickman) stickman).speed += 10;
+							((Falling_Blocks) fallingBlock).isBlue = false;
 						} else {
 
 						}
 					}
 					if (stickman.collisionBox3.intersects(fallingBlock.collisionBox)) {
-						stickman.x -= 5;
-						System.out.println("collision");
-						// stickman.x += 5;
-						System.out.println(fallingBlock.y);
+						if (((Falling_Blocks) fallingBlock).isRed == false) {
+							stickman.x -= 5;
+							System.out.println("collision");
+							// stickman.x += 5;
+							System.out.println(fallingBlock.y);
+						} else {
+
+						}
 
 					}
 					if (stickman.collisionBox4.intersects(fallingBlock.collisionBox)) {
-						stickman.x += 5;
-						System.out.println("COLLISION");
+						if (((Falling_Blocks) fallingBlock).isRed == false) {
+							stickman.x += 5;
+							System.out.println("COLLISION");
+						} else {
+
+						}
+						
 					}
+					
 					// if
 					// (stickman.collisionBox6.intersects(fallingBlock.collisionBox))
 					// {
