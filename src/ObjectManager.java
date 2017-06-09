@@ -9,7 +9,7 @@ public class ObjectManager {
 	private int score = 0;
 
 	long enemyTimer = 0;
-	int enemySpawnTime = 1000;
+	int enemySpawnTime = 900;
 
 	static int[] lanes = { 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865 };
 
@@ -34,7 +34,7 @@ public class ObjectManager {
 			GameObject o = objects.get(i);
 			o.update();
 		}
-
+          
 		// purgeObjects();
 	}
 
@@ -64,6 +64,7 @@ public class ObjectManager {
 	}
 
 	public void checkCollision() {
+		System.out.println(enemySpawnTime);
 		for (int i = 0; i < objects.size(); i++) {
 			for (int j = i + 1; j < objects.size(); j++) {
 				GameObject stickman = objects.get(i);
@@ -74,16 +75,45 @@ public class ObjectManager {
 					if (stickman.collisionBox.intersects(fallingBlock.collisionBox)) {
 						if (((Falling_Blocks) fallingBlock).isRed) {
 							stickman.y -= 45;
-							((Falling_Blocks) fallingBlock).isRed = false;
+							// ((Falling_Blocks) fallingBlock).isRed = false;
 						} else {
 
+						}
+					}
+					if (stickman instanceof Stickman) {
+
+						if (stickman.collisionBox.intersects(fallingBlock.collisionBox)
+								|| stickman.collisionBox2.intersects(fallingBlock.collisionBox)
+								|| stickman.collisionBox3.intersects(fallingBlock.collisionBox)
+								|| stickman.collisionBox4.intersects(fallingBlock.collisionBox)) {
+							if (!(((Falling_Blocks) fallingBlock).isRed) && !(((Falling_Blocks) fallingBlock).isBlue)) {
+								System.exit(0);
+							}
+						} else {
+
+						}
+					}
+					if (stickman instanceof Stickman){
+						if (stickman.y < 690) {
+							enemySpawnTime =450;
+						}
+						else{
+							enemySpawnTime = 900;
+						}
+					}
+					if (stickman instanceof Stickman){
+						if (stickman.y < 265) {
+							enemySpawnTime =225;
+						}
+						else if(stickman.y >690){
+							enemySpawnTime = 900;
 						}
 					}
 					if ((stickman.collisionBox.intersects(fallingBlock.collisionBox))) {
 						if (((Falling_Blocks) fallingBlock).isBlue) {
 							stickman.y -= 45;
-							((Stickman) stickman).speed += 10;
-							((Falling_Blocks) fallingBlock).isBlue = false;
+							((Stickman) stickman).speed += 5;
+							//((Falling_Blocks) fallingBlock).isBlue = false;
 						} else {
 
 						}
@@ -106,9 +136,9 @@ public class ObjectManager {
 						} else {
 
 						}
-						
+
 					}
-					
+
 					// if
 					// (stickman.collisionBox6.intersects(fallingBlock.collisionBox))
 					// {

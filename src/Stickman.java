@@ -42,9 +42,11 @@ public class Stickman extends GameObject {
 	void update() {
 		super.update();
 		// System.out.println(x + "." + y + ".");
+		
 		if (rightKey) {
 			// x = x + speed;
 			x += speed;
+			System.out.println(y);
 			// System.out.println("Right key");
 		}
 		if (leftKey) {

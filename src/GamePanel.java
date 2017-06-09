@@ -60,7 +60,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void startGame() {
+	
 		timer.start();
+	
 	}
 
 	public void paintComponent(Graphics g) {
