@@ -18,7 +18,7 @@ public class Falling_Blocks extends GameObject {
 		if (Math.random() > 0.95) {
 			isRed = false;
 			isBlue = true;
-		} else if(Math.random() > 0.75){
+		} else if (Math.random() > 0.70) {
 			isRed = true;
 			isBlue = false;
 		} else {
@@ -58,9 +58,9 @@ public class Falling_Blocks extends GameObject {
 
 		if (isBlue) {
 			g.setColor(Color.BLUE);
-		} else if(isRed){
+		} else if (isRed) {
 			g.setColor(Color.RED);
-		}else {
+		} else {
 			g.setColor(Color.GRAY);
 		}
 		g.fillRect(x, y, width, height);

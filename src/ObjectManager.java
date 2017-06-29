@@ -102,7 +102,7 @@ public class ObjectManager {
 						}
 					}
 					if (stickman instanceof Stickman){
-						if (stickman.y < 265) {
+						if (stickman.y < 310) {
 							enemySpawnTime =225;
 						}
 						else if(stickman.y >690){
