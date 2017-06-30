@@ -108,11 +108,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		button = new JButton();
 
 		add(button);
+		button.addActionListener(this);
 		button.setVisible(true);
 		button.setSize(100, 100);
 		button.setBackground(Color.WHITE);
 		button.setText("Start");
-		button.addActionListener(this);
 		// button.setForeground(Color.WHITE);
 		button.setOpaque(true);
 	}
@@ -195,13 +195,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			updateInstructState();
 		}
 		repaint();
-		if(e.getSource() == button){
-			JButton buttonPressed = (JButton) e.getSource();
+		if(e.getSource() == button && button!= null){
+			button.removeActionListener(this);
+
+		JButton buttonPressed = (JButton) e.getSource();
 			currentState++;
 			if(currentState > END_STATE){
 				currentState = MENU_STATE;
 			}
+			
 		}
+		
 	}
 
 	@Override
@@ -215,12 +219,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("keyPressed");
-//		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-//			currentState++;
-//			if (currentState > END_STATE) {
-//				currentState = MENU_STATE;
-//			}
-//		}
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			currentState++;
+			if (currentState > END_STATE) {
+				currentState = MENU_STATE;
+			}
+		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			currentState = INSTRUCT_STATE;
 
