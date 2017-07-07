@@ -94,25 +94,23 @@ public class ObjectManager {
 						}
 					}
 					if (stickman instanceof Stickman){
-						if (stickman.y < 690) {
-							enemySpawnTime =450;
+						if (stickman.y > 225) {
+							enemySpawnTime =1000;
 						}
-						else{
-							enemySpawnTime = 900;
-						}
+					
 					}
 					if (stickman instanceof Stickman){
-						if (stickman.y < 310) {
+						if (stickman.y <= 225) {
 							enemySpawnTime =225;
 						}
-						else if(stickman.y >690){
-							enemySpawnTime = 900;
+						else {
+							enemySpawnTime = 1000;
 						}
 					}
 					if ((stickman.collisionBox.intersects(fallingBlock.collisionBox))) {
 						if (((Falling_Blocks) fallingBlock).isBlue) {
 							stickman.y -= 45;
-							((Stickman) stickman).speed += 5;
+							((Stickman) stickman).speed += 3;
 							//((Falling_Blocks) fallingBlock).isBlue = false;
 						} else {
 

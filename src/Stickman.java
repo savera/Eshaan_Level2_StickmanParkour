@@ -42,7 +42,9 @@ public class Stickman extends GameObject {
 	void update() {
 		super.update();
 		// System.out.println(x + "." + y + ".");
-		
+		if (x >= 225) {
+			speed = 5;
+		}
 		if (rightKey) {
 			// x = x + speed;
 			x += speed;
@@ -90,19 +92,19 @@ public class Stickman extends GameObject {
 	}
 
 	public void draw(Graphics g) {
-		// g.drawImage(GamePanel.main2Img, x, y, width, height , null);
-		g.setColor(Color.BLUE);
-		((Graphics2D) g).draw(collisionBox);
-		g.setColor(Color.red);
-		((Graphics2D) g).draw(collisionBox2);
-		g.setColor(Color.CYAN);
-		((Graphics2D) g).draw(collisionBox3);
-		g.setColor(Color.ORANGE);
-		((Graphics2D) g).draw(collisionBox4);
-		g.setColor(Color.MAGENTA);
-		((Graphics2D) g).draw(collisionBox5);
-		g.setColor(Color.PINK);
-		((Graphics2D) g).draw(collisionBox6);
+		 g.drawImage(GamePanel.main2Img, x, y, width, height , null);
+//		g.setColor(Color.BLUE);
+//		((Graphics2D) g).draw(collisionBox);
+//		g.setColor(Color.red);
+//		((Graphics2D) g).draw(collisionBox2);
+//		g.setColor(Color.CYAN);
+//		((Graphics2D) g).draw(collisionBox3);
+//		g.setColor(Color.ORANGE);
+//		((Graphics2D) g).draw(collisionBox4);
+//		g.setColor(Color.MAGENTA);
+//		((Graphics2D) g).draw(collisionBox5);
+//		g.setColor(Color.PINK);
+//		((Graphics2D) g).draw(collisionBox6);
 		// g.setColor(Color.BLUE);
 		// g.fillRect(x, y, width, height);
 		// g.drawImage(, x, y, width, height, null);

@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
@@ -14,8 +16,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
-public class GamePanel extends JPanel implements ActionListener, KeyListener {
+//http://freesound.org/people/MarkoVujic92/sounds/271576/
+//music link
+public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseListener {
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
@@ -24,6 +27,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer timer;
 	Font titleFont;
 	Font titleFont2;
+	Font titleFont3;
 	Stickman stickman;
 	JButton button;
 	// Falling_Blocks blocks;
@@ -41,6 +45,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// blocks = new Falling_Blocks(250, 100, 35, 35);
 		titleFont = new Font("Lucida Calligraphy", Font.PLAIN, 54);
 		titleFont2 = new Font("Lucida Calligraphy", Font.PLAIN, 30);
+		titleFont3 = new Font("Lucida Calligraphy", Font.PLAIN, 25);
 		// for (int i = 0; i < 100; i++) {
 		// manager.addObject(new Falling_Blocks(random.nextInt(1000) , 100,
 		// 35,35));
@@ -87,35 +92,39 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 900);
 
-		// g.setFont(titleFont);
-		// g.setColor(Color.MAGENTA);
-		// g.drawString("Falling Sky", 290, 200);
-		if (button == null) {
-			startButton();
-		}
-
+		 g.setFont(titleFont);
+		 g.setColor(Color.MAGENTA);
+		 g.drawString("Falling Sky", 100, 200);
+		 
+		g.setColor(Color.BLUE);
+		g.fillRect(190, 50, 100, 25);
+		
+		g.setColor(Color.WHITE);
 		g.setFont(titleFont2);
+		g.drawString("Start", 205, 75);
+		
+		g.setFont(titleFont3);
 		g.setColor(Color.ORANGE);
-		// g.drawString("Click on Start to play the game", 350, 300);
+		 g.drawString("Click on Start to play the game", 45, 300);
 
-		g.setFont(titleFont2);
+		g.setFont(titleFont3);
 		g.setColor(Color.MAGENTA);
-		// g.drawString("Click Instructions for How To Play", 300, 400);
+		 g.drawString("Click Instructions for How To Play", 25, 400);
 
 	}
 
-	void startButton() {
-		button = new JButton();
-
-		add(button);
-		button.addActionListener(this);
-		button.setVisible(true);
-		button.setSize(100, 100);
-		button.setBackground(Color.WHITE);
-		button.setText("Start");
-		// button.setForeground(Color.WHITE);
-		button.setOpaque(true);
-	}
+	// void startButton() {
+	// button = new JButton();
+	//
+	// add(button);
+	// button.addActionListener(this);
+	// button.setVisible(true);
+	// button.setSize(100, 100);
+	// button.setBackground(Color.WHITE);
+	// button.setText("Start");
+	// // button.setForeground(Color.WHITE);
+	// button.setOpaque(true);
+	// }
 
 	void drawGameState(Graphics g) {
 		if (button != null) {
@@ -195,17 +204,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			updateInstructState();
 		}
 		repaint();
-		if(e.getSource() == button && button!= null){
+		if (e.getSource() == button && button != null) {
 			button.removeActionListener(this);
 
-		JButton buttonPressed = (JButton) e.getSource();
+			JButton buttonPressed = (JButton) e.getSource();
 			currentState++;
-			if(currentState > END_STATE){
+			if (currentState > END_STATE) {
 				currentState = MENU_STATE;
 			}
-			
+
 		}
-		
+
 	}
 
 	@Override
@@ -261,6 +270,43 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// stickman.upkey = false;
 		// }
 
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println(e.getX());
+		System.out.println(e.getY());
+		if(MENU_STATE == currentState){
+			if(e.getX() > 190 && e.getX() < 290 && e.getY() > 70 && e.getY() < 100){
+				currentState = GAME_STATE;
+				
+			}
+		}
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

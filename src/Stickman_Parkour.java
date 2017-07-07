@@ -31,6 +31,7 @@ public class Stickman_Parkour extends JPanel implements ActionListener, KeyListe
 		frame.addKeyListener(panel);
 		frame.setVisible(true);
 		frame.setSize(width, height);
+		frame.addMouseListener(panel);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel.startGame();
