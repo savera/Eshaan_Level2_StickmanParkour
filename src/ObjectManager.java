@@ -9,7 +9,7 @@ public class ObjectManager {
 	private int score = 0;
 
 	long enemyTimer = 0;
-	int enemySpawnTime = 900;
+	int enemySpawnTime = 700;
 
 	static int[] lanes = { 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865 };
 
@@ -87,7 +87,8 @@ public class ObjectManager {
 								|| stickman.collisionBox3.intersects(fallingBlock.collisionBox)
 								|| stickman.collisionBox4.intersects(fallingBlock.collisionBox)) {
 							if (!(((Falling_Blocks) fallingBlock).isRed) && !(((Falling_Blocks) fallingBlock).isBlue)) {
-								System.exit(0);
+								stickman.isAlive = false;
+								System.out.println("DEAD");
 							}
 						} else {
 
@@ -95,7 +96,7 @@ public class ObjectManager {
 					}
 					if (stickman instanceof Stickman){
 						if (stickman.y > 225) {
-							enemySpawnTime =1000;
+							enemySpawnTime =700;
 						}
 					
 					}
@@ -104,7 +105,7 @@ public class ObjectManager {
 							enemySpawnTime =225;
 						}
 						else {
-							enemySpawnTime = 1000;
+							enemySpawnTime = enemySpawnTime;
 						}
 					}
 					if ((stickman.collisionBox.intersects(fallingBlock.collisionBox))) {
@@ -121,7 +122,7 @@ public class ObjectManager {
 							stickman.x -= 5;
 							System.out.println("collision");
 							// stickman.x += 5;
-							System.out.println(fallingBlock.y);
+							//System.out.println(fallingBlock.y);
 						} else {
 
 						}

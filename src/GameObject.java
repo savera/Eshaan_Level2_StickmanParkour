@@ -13,7 +13,7 @@ public class GameObject {
 	int width;
 	int height;
 	int lane;
-	public boolean isAlive;
+	public boolean isAlive = true;
 	 Rectangle collisionBox = new Rectangle();
 	 Rectangle collisionBox2 = new Rectangle();
 	 Rectangle collisionBox3 = new Rectangle();

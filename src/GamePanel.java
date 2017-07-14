@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
 //http://freesound.org/people/MarkoVujic92/sounds/271576/
 //music link
 public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseListener {
@@ -92,24 +93,31 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 900);
 
-		 g.setFont(titleFont);
-		 g.setColor(Color.MAGENTA);
-		 g.drawString("Falling Sky", 100, 200);
-		 
+		g.setFont(titleFont);
+		g.setColor(Color.MAGENTA);
+		g.drawString("Falling Sky", 100, 200);
+
 		g.setColor(Color.BLUE);
 		g.fillRect(190, 50, 100, 25);
-		
+
 		g.setColor(Color.WHITE);
 		g.setFont(titleFont2);
 		g.drawString("Start", 205, 75);
-		
+
+		g.setColor(Color.BLUE);
+		g.fillRect(150, 110, 190, 25);
+
+		g.setColor(Color.WHITE);
+		g.setFont(titleFont2);
+		g.drawString("Instructions", 160, 135);
+
 		g.setFont(titleFont3);
 		g.setColor(Color.ORANGE);
-		 g.drawString("Click on Start to play the game", 45, 300);
+		g.drawString("Click on Start to play the game", 45, 300);
 
 		g.setFont(titleFont3);
 		g.setColor(Color.MAGENTA);
-		 g.drawString("Click Instructions for How To Play", 25, 400);
+		g.drawString("Click Instructions for How To Play", 25, 400);
 
 	}
 
@@ -139,16 +147,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	}
 
 	void drawEndState(Graphics g) {
-		// g.setColor(Color.BLACK);
-		// g.fillRect(0, 0, 500, 900);
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, 500, 900);
 
-		// g.setFont(titleFont);
-		// g.setColor(Color.RED);
-		// g.drawString("GAME OVER", 360, 225);
+		g.setFont(titleFont);
+		g.setColor(Color.RED);
+		g.drawString("GAME OVER", 360, 225);
 
-		// g.setFont(titleFont2);
-		// g.setColor(Color.RED);
-		// g.drawString("Press BACKSPACE to Restart", 330, 415);
+		g.setFont(titleFont2);
+		g.setColor(Color.RED);
+		g.drawString("Press BACKSPACE to Restart", 330, 415);
 
 		g.setFont(titleFont2);
 		g.setColor(Color.BLACK);
@@ -203,17 +211,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		if (currentState == INSTRUCT_STATE) {
 			updateInstructState();
 		}
-		repaint();
-		if (e.getSource() == button && button != null) {
-			button.removeActionListener(this);
 
-			JButton buttonPressed = (JButton) e.getSource();
-			currentState++;
-			if (currentState > END_STATE) {
-				currentState = MENU_STATE;
-			}
 
+		if (stickman.isAlive == false) {
+			currentState = END_STATE;
 		}
+		repaint();
 
 	}
 
@@ -275,7 +278,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -283,10 +286,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		// TODO Auto-generated method stub
 		System.out.println(e.getX());
 		System.out.println(e.getY());
-		if(MENU_STATE == currentState){
-			if(e.getX() > 190 && e.getX() < 290 && e.getY() > 70 && e.getY() < 100){
+		if (MENU_STATE == currentState) {
+			if (e.getX() > 190 && e.getX() < 290 && e.getY() > 70 && e.getY() < 100) {
 				currentState = GAME_STATE;
-				
+
+			}
+		}
+		if (MENU_STATE == currentState) {
+			if (e.getX() > 150 && e.getX() < 340 && e.getY() > 135 && e.getY() < 160) {
+				currentState = INSTRUCT_STATE;
 			}
 		}
 	}
@@ -294,19 +302,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
