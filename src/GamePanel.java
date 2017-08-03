@@ -150,31 +150,52 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 900);
 
-		g.setFont(titleFont);
+		g.setFont(titleFont3);
 		g.setColor(Color.RED);
-		g.drawString("GAME OVER", 360, 225);
+		g.drawString("GAME OVER", 175, 241);
 
+		g.setColor(Color.BLUE);
+		g.fillRect(185, 350, 115, 25);
+
+		g.setColor(Color.WHITE);
 		g.setFont(titleFont2);
-		g.setColor(Color.RED);
-		g.drawString("Press BACKSPACE to Restart", 330, 415);
-
+		g.drawString("Restart", 190, 375);
 		g.setFont(titleFont2);
 		g.setColor(Color.BLACK);
 
 	}
 
 	void drawInstructState(Graphics g) {
-		// g.setColor(Color.BLACK);
-		// g.fillRect(0, 0, 500, 900);
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, 500, 900);
+		g.setFont(titleFont);
+		g.setColor(Color.MAGENTA);
+		g.drawString("Objective", 30, 80);
 
-		// g.setFont(titleFont);
-		// g.setColor(Color.WHITE);
-		// g.drawString("How to Play", 40, 90);
+		g.setFont(titleFont3);
+		g.setColor(Color.WHITE);
+		g.drawString("Try to get to the top of the screen", 10, 110);
+		g.setColor(Color.GRAY);
+		g.drawString("GRAY BLOCKS: Kills the character", 10, 140);
+		
+		g.setColor(Color.RED);
+		g.drawString("RED BLOCKS: Moves the character up ", 10, 170);
+		g.drawString("one level", 10, 200);
+		
+		g.setColor(Color.BLUE);
+		g.drawString("BLUE BLOCKS: Moves the character up ", 10, 230);
+		g.drawString("one level, as well as speeds up the", 10, 260);
+		g.drawString("character's movement", 10, 290);
 
-		// g.setFont(titleFont2);
-		// ("Press the Up Arrow Key to go RIGHT", 40, 150);
-		// g.drawString("Press the Left Key to go LEFT", 40, 210);
-		// ("Press Up Arrow Key to JUMP", 40, 270);
+		g.setFont(titleFont);
+		g.setColor(Color.MAGENTA);
+		g.drawString("How to Play", 30, 380);
+
+//		g.setColor(Color.BLACK);
+//		g.setFont(titleFont3);
+//		g.drawString("Press the Up Arrow Key to go RIGHT", 40, 150);
+//		g.drawString("Press the Left Key to go LEFT", 40, 210);
+//		g.drawString("Press Up Arrow Key to JUMP", 40, 270);
 	}
 
 	void updateMenuState() {
@@ -211,7 +232,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		if (currentState == INSTRUCT_STATE) {
 			updateInstructState();
 		}
-
 
 		if (stickman.isAlive == false) {
 			currentState = END_STATE;
@@ -295,6 +315,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		if (MENU_STATE == currentState) {
 			if (e.getX() > 150 && e.getX() < 340 && e.getY() > 135 && e.getY() < 160) {
 				currentState = INSTRUCT_STATE;
+			}
+		}
+		if (END_STATE == currentState) {
+			if (e.getX() > 185 && e.getX() < 301 && e.getY() > 375 && e.getY() < 400) {
+				currentState = MENU_STATE;
 			}
 		}
 	}
