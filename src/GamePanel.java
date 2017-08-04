@@ -44,9 +44,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		stickman = new Stickman(200, 860, 30, 30);
 		manager.addObject(stickman);
 		// blocks = new Falling_Blocks(250, 100, 35, 35);
-		titleFont = new Font("Lucida Calligraphy", Font.PLAIN, 54);
-		titleFont2 = new Font("Lucida Calligraphy", Font.PLAIN, 30);
-		titleFont3 = new Font("Lucida Calligraphy", Font.PLAIN, 25);
+		titleFont = new Font("Ariel", Font.PLAIN, 54);
+		titleFont2 = new Font("Ariel", Font.PLAIN, 30);
+		titleFont3 = new Font("Ariel", Font.PLAIN, 25);
 		// for (int i = 0; i < 100; i++) {
 		// manager.addObject(new Falling_Blocks(random.nextInt(1000) , 100,
 		// 35,35));
