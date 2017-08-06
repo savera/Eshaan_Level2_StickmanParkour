@@ -88,7 +88,7 @@ public class ObjectManager {
 								|| stickman.collisionBox4.intersects(fallingBlock.collisionBox)) {
 							if (!(((Falling_Blocks) fallingBlock).isRed) && !(((Falling_Blocks) fallingBlock).isBlue)) {
 								stickman.isAlive = false;
-								System.out.println("DEAD");
+								//System.out.println("DEAD");
 							}
 						} else {
 
@@ -111,7 +111,7 @@ public class ObjectManager {
 					if ((stickman.collisionBox.intersects(fallingBlock.collisionBox))) {
 						if (((Falling_Blocks) fallingBlock).isBlue) {
 							stickman.y -= 45;
-							((Stickman) stickman).speed += 3;
+							((Stickman) stickman).speed += 2;
 							//((Falling_Blocks) fallingBlock).isBlue = false;
 						} else {
 
@@ -120,7 +120,7 @@ public class ObjectManager {
 					if (stickman.collisionBox3.intersects(fallingBlock.collisionBox)) {
 						if (((Falling_Blocks) fallingBlock).isRed == false) {
 							stickman.x -= 5;
-							System.out.println("collision");
+							//System.out.println("collision");
 							// stickman.x += 5;
 							//System.out.println(fallingBlock.y);
 						} else {
@@ -131,7 +131,7 @@ public class ObjectManager {
 					if (stickman.collisionBox4.intersects(fallingBlock.collisionBox)) {
 						if (((Falling_Blocks) fallingBlock).isRed == false) {
 							stickman.x += 5;
-							System.out.println("COLLISION");
+							//System.out.println("COLLISION");
 						} else {
 
 						}

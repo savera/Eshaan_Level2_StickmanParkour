@@ -243,14 +243,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("keyTyped");
+		//System.out.println("keyTyped");
 
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("keyPressed");
+		//System.out.println("keyPressed");
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			currentState++;
 			if (currentState > END_STATE) {
@@ -281,7 +281,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("keyReleased");
+		//System.out.println("keyReleased");
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			stickman.leftKey = false;
 		}
@@ -304,8 +304,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(e.getX());
-		System.out.println(e.getY());
+		//System.out.println(e.getX());
+		//System.out.println(e.getY());
 		if (MENU_STATE == currentState) {
 			if (e.getX() > 190 && e.getX() < 290 && e.getY() > 70 && e.getY() < 100) {
 				currentState = GAME_STATE;

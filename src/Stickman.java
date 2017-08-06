@@ -43,22 +43,24 @@ public class Stickman extends GameObject {
 		super.update();
 		// System.out.println(x + "." + y + ".");
 		if (x >= 225) {
-			speed = 5;
+			speed = speed;
 		}
 		if (rightKey) {
+			System.out.println(speed);
 			// x = x + speed;
 			x += speed;
-			System.out.println(y);
+			//System.out.println(y);
 			// System.out.println("Right key");
 		}
 		if (leftKey) {
+			System.out.println(speed);
 			// x = x - speed;
 			x -= speed;
-			System.out.println("Left key");
+			//System.out.println("Left key");
 		}
 		if (upkey) {
 			Jump();
-			System.out.println("up key " + y);
+			//System.out.println("up key " + y);
 		}
 
 		//y -= yVelocity;
@@ -74,7 +76,7 @@ public class Stickman extends GameObject {
 //		}
 		if (x >= 463) {
 			// x = 1000 - width;
-			x = 458;
+			x = 460;
 
 		} else if (x <= 0) {
 			x = 0;
