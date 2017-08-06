@@ -41,7 +41,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	// public static BufferedImage bulletImg;
 	GamePanel() {
 		Random random = new Random();
-		stickman = new Stickman(200, 860, 30, 30);
+		stickman = new Stickman(200, 865, 30, 30);
 		manager.addObject(stickman);
 		// blocks = new Falling_Blocks(250, 100, 35, 35);
 		titleFont = new Font("Ariel", Font.PLAIN, 54);
