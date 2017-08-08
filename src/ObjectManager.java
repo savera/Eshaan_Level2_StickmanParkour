@@ -74,7 +74,10 @@ public class ObjectManager {
 
 					if (stickman.collisionBox.intersects(fallingBlock.collisionBox)) {
 						if (((Falling_Blocks) fallingBlock).isRed) {
+							//FIX DOWN BELOW
 							stickman.y -= 30;
+							//FIX UP ABOVE
+							
 							// ((Falling_Blocks) fallingBlock).isRed = false;
 						} else {
 
