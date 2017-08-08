@@ -74,9 +74,9 @@ public class ObjectManager {
 
 					if (stickman.collisionBox.intersects(fallingBlock.collisionBox)) {
 						if (((Falling_Blocks) fallingBlock).isRed) {
-							//FIX DOWN BELOW
-							stickman.y -= 30;
-							//FIX UP ABOVE
+							//FIX DOWN BELOW - FIXED
+							stickman.y -= 6;
+							//FIX UP ABOVE - FIXED
 							
 							// ((Falling_Blocks) fallingBlock).isRed = false;
 						} else {
@@ -113,7 +113,7 @@ public class ObjectManager {
 					}
 					if ((stickman.collisionBox.intersects(fallingBlock.collisionBox))) {
 						if (((Falling_Blocks) fallingBlock).isBlue) {
-							stickman.y -= 45;
+							stickman.y -= 6;
 							((Stickman) stickman).speed += 2;
 							//((Falling_Blocks) fallingBlock).isBlue = false;
 						} else {
