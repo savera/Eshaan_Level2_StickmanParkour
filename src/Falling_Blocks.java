@@ -15,7 +15,7 @@ public class Falling_Blocks extends GameObject {
 		this.height = height;
 		this.width = width;
 		this.lane = lane;
-		if (Math.random() > 0.95) {
+		if (Math.random() > 0.97) {
 			isRed = false;
 			isBlue = true;
 		} else if (Math.random() > 0.70) {

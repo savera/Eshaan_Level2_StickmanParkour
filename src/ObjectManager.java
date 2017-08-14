@@ -11,8 +11,11 @@ public class ObjectManager {
 	long enemyTimer = 0;
 	int enemySpawnTime = 700;
 
-	static int[] lanes = { 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865 };
+	static int[] lanes ;
 
+	public static void initLanes(){
+	 lanes = new int[] { 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865 };
+	}
 	public int getLanes(int i) {
 		return lanes[i];
 	}
@@ -22,7 +25,9 @@ public class ObjectManager {
 	}
 
 	public ObjectManager() {
+	initLanes();	
 		objects = new ArrayList<GameObject>();
+	
 	}
 
 	public void addObject(GameObject o) {

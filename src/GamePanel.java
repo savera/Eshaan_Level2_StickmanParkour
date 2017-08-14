@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.sound.midi.Synthesizer;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -22,8 +23,9 @@ import javax.swing.Timer;
 public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseListener {
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
-	final int END_STATE = 2;
-	final int INSTRUCT_STATE = 3;
+	final int INSTRUCT_STATE = 2;	
+	final int END_STATE = 3;
+
 	int currentState = MENU_STATE;
 	Timer timer;
 	Font titleFont;
@@ -31,6 +33,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	Font titleFont3;
 	Stickman stickman;
 	JButton button;
+	
 	// Falling_Blocks blocks;
 	ObjectManager manager = new ObjectManager();
 	// public static BufferedImage alienImg;
@@ -41,8 +44,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	// public static BufferedImage bulletImg;
 	GamePanel() {
 		Random random = new Random();
-		stickman = new Stickman(200, 865, 30, 30);
-		manager.addObject(stickman);
+		init();
 		// blocks = new Falling_Blocks(250, 100, 35, 35);
 		titleFont = new Font("Ariel", Font.PLAIN, 54);
 		titleFont2 = new Font("Ariel", Font.PLAIN, 30);
@@ -65,7 +67,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		timer = new Timer(1000 / 60, this);
 
 	}
-
+void init(){
+ manager = new ObjectManager();
+ ObjectManager.initLanes();
+ stickman = new Stickman(200, 865, 30, 30);
+ manager.addObject(stickman);
+}
 	void startGame() {
 
 		timer.start();
@@ -166,6 +173,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	}
 
 	void drawInstructState(Graphics g) {
+		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 900);
 		g.setFont(titleFont);
@@ -177,11 +185,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.drawString("Try to get to the top of the screen", 10, 110);
 		g.setColor(Color.GRAY);
 		g.drawString("GRAY BLOCKS: Kills the character", 10, 140);
-		
+
 		g.setColor(Color.RED);
 		g.drawString("RED BLOCKS: Moves the character up ", 10, 170);
 		g.drawString("one level", 10, 200);
-		
+
 		g.setColor(Color.BLUE);
 		g.drawString("BLUE BLOCKS: Moves the character up ", 10, 230);
 		g.drawString("one level, as well as speeds up the", 10, 260);
@@ -190,12 +198,24 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.setFont(titleFont);
 		g.setColor(Color.MAGENTA);
 		g.drawString("How to Play", 30, 380);
+		
+		g.setFont(titleFont3); 
+		g.setColor(Color.WHITE);
+		g.drawString("Use the left <-- arrow key to move to", 10, 410);
+		g.drawString("the left", 10, 440);
+		g.drawString("Use the right --> arrow key to move to", 10, 470);
+		g.drawString("the right", 10, 500);
+		
+		
+		//g.fillRect(x, y, width, height);
+		g.setColor(Color.BLUE);
+		g.fillRect(345, 870, 140, 25);
 
-//		g.setColor(Color.BLACK);
-//		g.setFont(titleFont3);
-//		g.drawString("Press the Up Arrow Key to go RIGHT", 40, 150);
-//		g.drawString("Press the Left Key to go LEFT", 40, 210);
-//		g.drawString("Press Up Arrow Key to JUMP", 40, 270);
+		g.setColor(Color.WHITE);
+		g.setFont(titleFont2);
+		g.drawString("Start -->", 350, 895);
+
+		
 	}
 
 	void updateMenuState() {
@@ -236,6 +256,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		if (stickman.isAlive == false) {
 			currentState = END_STATE;
 		}
+		
 		repaint();
 
 	}
@@ -243,24 +264,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		//System.out.println("keyTyped");
+		// System.out.println("keyTyped");
 
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		//System.out.println("keyPressed");
+		// System.out.println("keyPressed");
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			currentState++;
 			if (currentState > END_STATE) {
 				currentState = MENU_STATE;
 			}
 		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			currentState = INSTRUCT_STATE;
 
-		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			stickman.rightKey = true;
 
@@ -272,16 +290,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		// stickman.upkey = true;
 		// }
 
-		if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-			currentState = MENU_STATE;
-		}
+		// if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+		// currentState = MENU_STATE;
+		// }
 		updateGameState();
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		//System.out.println("keyReleased");
+		// System.out.println("keyReleased");
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			stickman.leftKey = false;
 		}
@@ -304,8 +322,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		//System.out.println(e.getX());
-		//System.out.println(e.getY());
+		 System.out.println(e.getX());
+		 System.out.println(e.getY());
+
 		if (MENU_STATE == currentState) {
 			if (e.getX() > 190 && e.getX() < 290 && e.getY() > 70 && e.getY() < 100) {
 				currentState = GAME_STATE;
@@ -319,8 +338,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		}
 		if (END_STATE == currentState) {
 			if (e.getX() > 185 && e.getX() < 301 && e.getY() > 375 && e.getY() < 400) {
-				currentState = MENU_STATE;
+				init();
+				currentState = GAME_STATE;
+				
+
 			}
+		}
+		if (INSTRUCT_STATE == currentState) {
+			if (e.getX() > 345 && e.getX() < 485 && e.getY() > 895 && e.getY() < 916) {
+				currentState = GAME_STATE;
+			}
+			
 		}
 	}
 
