@@ -114,7 +114,7 @@ public class ObjectManager {
 					if ((stickman.collisionBox.intersects(fallingBlock.collisionBox))) {
 						if (((Falling_Blocks) fallingBlock).isBlue) {
 							stickman.y -= 6;
-							((Stickman) stickman).speed += 2;
+							((Stickman) stickman).speed += 1;
 							//((Falling_Blocks) fallingBlock).isBlue = false;
 						} else {
 
