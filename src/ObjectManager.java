@@ -11,8 +11,11 @@ public class ObjectManager {
 	long enemyTimer = 0;
 	int enemySpawnTime = 700;
 
-	static int[] lanes = { 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865 };
+	static int[] lanes ;
 
+	public static void initLanes(){
+	 lanes = new int[] { 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865 };
+	}
 	public int getLanes(int i) {
 		return lanes[i];
 	}
@@ -22,7 +25,9 @@ public class ObjectManager {
 	}
 
 	public ObjectManager() {
+	initLanes();	
 		objects = new ArrayList<GameObject>();
+	
 	}
 
 	public void addObject(GameObject o) {
@@ -114,7 +119,7 @@ public class ObjectManager {
 					if ((stickman.collisionBox.intersects(fallingBlock.collisionBox))) {
 						if (((Falling_Blocks) fallingBlock).isBlue) {
 							stickman.y -= 6;
-							((Stickman) stickman).speed += 2;
+							((Stickman) stickman).speed += 1;
 							//((Falling_Blocks) fallingBlock).isBlue = false;
 						} else {
 
