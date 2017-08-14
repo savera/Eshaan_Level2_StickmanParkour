@@ -7,6 +7,7 @@ public class Falling_Blocks extends GameObject {
 	boolean placed = false;
 	boolean isRed;
 	boolean isBlue;
+	boolean isBlack;
 
 	Falling_Blocks(int x, int y, int width, int height, int lane) {
 		super();
@@ -15,15 +16,22 @@ public class Falling_Blocks extends GameObject {
 		this.height = height;
 		this.width = width;
 		this.lane = lane;
-		if (Math.random() > 0.97) {
+		if (Math.random() > 0.98) {
 			isRed = false;
 			isBlue = true;
+			isBlack = false;
 		} else if (Math.random() > 0.70) {
 			isRed = true;
 			isBlue = false;
+			isBlack = false;
+		} else if (Math.random() > 0.70) {
+			isBlack = true;
+			isBlue = false;
+			isRed = false;
 		} else {
 			isBlue = false;
 			isRed = false;
+			isBlack = false;
 		}
 	}
 
@@ -60,6 +68,8 @@ public class Falling_Blocks extends GameObject {
 			g.setColor(Color.BLUE);
 		} else if (isRed) {
 			g.setColor(Color.RED);
+		} else if (isBlack) {
+			g.setColor(Color.BLACK);
 		} else {
 			g.setColor(Color.GRAY);
 		}

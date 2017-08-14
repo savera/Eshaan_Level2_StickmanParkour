@@ -1,7 +1,10 @@
 
+import java.applet.AudioClip;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.swing.JApplet;
 
 public class ObjectManager {
 	ArrayList<GameObject> objects;
@@ -11,11 +14,12 @@ public class ObjectManager {
 	long enemyTimer = 0;
 	int enemySpawnTime = 700;
 
-	static int[] lanes ;
+	static int[] lanes;
 
-	public static void initLanes(){
-	 lanes = new int[] { 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865 };
+	public static void initLanes() {
+		lanes = new int[] { 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865, 865 };
 	}
+
 	public int getLanes(int i) {
 		return lanes[i];
 	}
@@ -25,9 +29,9 @@ public class ObjectManager {
 	}
 
 	public ObjectManager() {
-	initLanes();	
+		initLanes();
 		objects = new ArrayList<GameObject>();
-	
+
 	}
 
 	public void addObject(GameObject o) {
@@ -39,7 +43,7 @@ public class ObjectManager {
 			GameObject o = objects.get(i);
 			o.update();
 		}
-          
+
 		// purgeObjects();
 	}
 
@@ -67,7 +71,15 @@ public class ObjectManager {
 		}
 
 	}
-
+	private void menuMusic() {
+		
+		
+		AudioClip sound = JApplet.newAudioClip(getClass().getResource("271576__markovujic92__dubstep-loop-perfect-by-mark-w (1).mp3"));
+			
+		sound.play();
+		System.out.println("play");
+		
+	}
 	public void checkCollision() {
 		System.out.println(enemySpawnTime);
 		for (int i = 0; i < objects.size(); i++) {
@@ -79,11 +91,9 @@ public class ObjectManager {
 
 					if (stickman.collisionBox.intersects(fallingBlock.collisionBox)) {
 						if (((Falling_Blocks) fallingBlock).isRed) {
-							//FIX DOWN BELOW - FIXED
+							menuMusic();
 							stickman.y -= 6;
-							//FIX UP ABOVE - FIXED
-							
-							// ((Falling_Blocks) fallingBlock).isRed = false;
+
 						} else {
 
 						}
@@ -94,25 +104,25 @@ public class ObjectManager {
 								|| stickman.collisionBox2.intersects(fallingBlock.collisionBox)
 								|| stickman.collisionBox3.intersects(fallingBlock.collisionBox)
 								|| stickman.collisionBox4.intersects(fallingBlock.collisionBox)) {
-							if (!(((Falling_Blocks) fallingBlock).isRed) && !(((Falling_Blocks) fallingBlock).isBlue)) {
+							if (!(((Falling_Blocks) fallingBlock).isRed) && !(((Falling_Blocks) fallingBlock).isBlue)
+									&& !(((Falling_Blocks) fallingBlock).isBlack)) {
 								stickman.isAlive = false;
-								//System.out.println("DEAD");
+								// System.out.println("DEAD");
 							}
 						} else {
 
 						}
 					}
-					if (stickman instanceof Stickman){
+					if (stickman instanceof Stickman) {
 						if (stickman.y > 220) {
-							enemySpawnTime =700;
+							enemySpawnTime = 700;
 						}
-					
+
 					}
-					if (stickman instanceof Stickman){
+					if (stickman instanceof Stickman) {
 						if (stickman.y <= 225) {
-							enemySpawnTime =225;
-						}
-						else {
+							enemySpawnTime = 225;
+						} else {
 							enemySpawnTime = enemySpawnTime;
 						}
 					}
@@ -120,17 +130,22 @@ public class ObjectManager {
 						if (((Falling_Blocks) fallingBlock).isBlue) {
 							stickman.y -= 6;
 							((Stickman) stickman).speed += 1;
-							//((Falling_Blocks) fallingBlock).isBlue = false;
+
 						} else {
 
+						}
+						if ((stickman.collisionBox.intersects(fallingBlock.collisionBox))) {
+							if (((Falling_Blocks) fallingBlock).isBlack) {
+								stickman.y += 6;
+							} else {
+
+							}
 						}
 					}
 					if (stickman.collisionBox3.intersects(fallingBlock.collisionBox)) {
 						if (((Falling_Blocks) fallingBlock).isRed == false) {
 							stickman.x -= 5;
-							//System.out.println("collision");
-							// stickman.x += 5;
-							//System.out.println(fallingBlock.y);
+							
 						} else {
 
 						}
@@ -140,6 +155,7 @@ public class ObjectManager {
 						if (((Falling_Blocks) fallingBlock).isRed == false) {
 							stickman.x += 5;
 							//System.out.println("COLLISION");
+
 						} else {
 
 						}

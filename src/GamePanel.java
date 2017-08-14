@@ -1,4 +1,5 @@
 
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -13,13 +14,24 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
-import javax.sound.midi.Synthesizer;
+import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
+// menu page music
 //http://freesound.org/people/MarkoVujic92/sounds/271576/
-//music link
+
+//http://freesound.org/people/B_Lamerichs/sounds/264057/
+//game over music
+
+//https://www.youtube.com/watch?v=9Fv5cuYZFC0
+//Game music
+
+
+
+//MAKE LEVELS:
+//   BLACK ----------> Black blocks push you all the way down to the bottom
+// Make the blocks appear after a certain y point, and make the map endless. Add score thingy too
 public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseListener {
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
@@ -50,9 +62,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		titleFont2 = new Font("Ariel", Font.PLAIN, 30);
 		titleFont3 = new Font("Ariel", Font.PLAIN, 25);
 		// for (int i = 0; i < 100; i++) {
-		// manager.addObject(new Falling_Blocks(random.nextInt(1000) , 100,
-		// 35,35));
-		// }
+		
 		try {
 			main2Img = ImageIO.read(this.getClass().getResourceAsStream("Main2.jpg"));
 			// FallingBImg =
@@ -68,6 +78,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 	}
 void init(){
+	
  manager = new ObjectManager();
  ObjectManager.initLanes();
  stickman = new Stickman(200, 865, 30, 30);
@@ -76,8 +87,20 @@ void init(){
 	void startGame() {
 
 		timer.start();
+		
+			
+		
 
 	}
+//	private void menuMusic() {
+//		
+//		
+//		AudioClip sound = JApplet.newAudioClip(getClass().getResource("271576__markovujic92__dubstep-loop-perfect-by-mark-w (1).mp3"));
+//			
+//		sound.play();
+//		System.out.println("play");
+//		
+//	}
 
 	public void paintComponent(Graphics g) {
 
@@ -97,6 +120,8 @@ void init(){
 
 	void drawMenuState(Graphics g) {
 
+
+		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 900);
 
@@ -128,18 +153,7 @@ void init(){
 
 	}
 
-	// void startButton() {
-	// button = new JButton();
-	//
-	// add(button);
-	// button.addActionListener(this);
-	// button.setVisible(true);
-	// button.setSize(100, 100);
-	// button.setBackground(Color.WHITE);
-	// button.setText("Start");
-	// // button.setForeground(Color.WHITE);
-	// button.setOpaque(true);
-	// }
+
 
 	void drawGameState(Graphics g) {
 		if (button != null) {
@@ -217,9 +231,17 @@ void init(){
 
 		
 	}
+//	private void menuMusic() {
+//		
+//		
+//		AudioClip sound = JApplet.newAudioClip(getClass().getResource("menu.wav"));
+//			
+//		sound.play();
+//		
+//	}
 
 	void updateMenuState() {
-
+		
 	}
 
 	void updateGameState() {
@@ -307,6 +329,9 @@ void init(){
 			stickman.rightKey = false;
 
 		}
+		if(MENU_STATE == currentState) {
+			
+		}
 		// if (e.getKeyCode() == KeyEvent.VK_UP) {
 		// stickman.upkey = false;
 		// }
@@ -333,7 +358,9 @@ void init(){
 		}
 		if (MENU_STATE == currentState) {
 			if (e.getX() > 150 && e.getX() < 340 && e.getY() > 135 && e.getY() < 160) {
+				
 				currentState = INSTRUCT_STATE;
+				
 			}
 		}
 		if (END_STATE == currentState) {
