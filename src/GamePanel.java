@@ -1,5 +1,6 @@
 
 import java.applet.AudioClip;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -10,6 +11,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
@@ -18,6 +20,8 @@ import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 // menu page music
 //http://freesound.org/people/MarkoVujic92/sounds/271576/
 
@@ -45,7 +49,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	Font titleFont3;
 	Stickman stickman;
 	JButton button;
-	
+	SimplePlayer music;
+	SimplePlayer music2;
+	SimplePlayer music3;
 	// Falling_Blocks blocks;
 	ObjectManager manager = new ObjectManager();
 	// public static BufferedImage alienImg;
@@ -87,20 +93,22 @@ void init(){
 	void startGame() {
 
 		timer.start();
+		music = new SimplePlayer("menuMusic.mp3");
 		
-			
+		
+		//menuMusic();
 		
 
 	}
-//	private void menuMusic() {
-//		
-//		
-//		AudioClip sound = JApplet.newAudioClip(getClass().getResource("271576__markovujic92__dubstep-loop-perfect-by-mark-w (1).mp3"));
-//			
-//		sound.play();
-//		System.out.println("play");
-//		
-//	}
+	private void menuMusic() {
+		
+		
+//		String bip = "menuMusic.mp3";
+//		Media hit = new Media(new File(bip).toURI().toString());
+//		MediaPlayer mediaPlayer = new MediaPlayer(hit);
+//		mediaPlayer.play();
+		
+	}
 
 	public void paintComponent(Graphics g) {
 
@@ -168,6 +176,8 @@ void init(){
 	}
 
 	void drawEndState(Graphics g) {
+		music2.stop();
+		//music = new SimplePlayer("endGame.mp3");
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 900);
 
@@ -245,9 +255,7 @@ void init(){
 	}
 
 	void updateGameState() {
-		//
-		// stickman.update();
-		// blocks.update();
+	
 		manager.checkCollision();
 		manager.update();
 		manager.manageEnemies();
@@ -353,7 +361,8 @@ void init(){
 		if (MENU_STATE == currentState) {
 			if (e.getX() > 190 && e.getX() < 290 && e.getY() > 70 && e.getY() < 100) {
 				currentState = GAME_STATE;
-
+				music.stop();
+				music2 = new SimplePlayer("gameMusic.mp3");
 			}
 		}
 		if (MENU_STATE == currentState) {
@@ -367,13 +376,15 @@ void init(){
 			if (e.getX() > 185 && e.getX() < 301 && e.getY() > 375 && e.getY() < 400) {
 				init();
 				currentState = GAME_STATE;
-				
+				music2 = new SimplePlayer("gameMusic.mp3");
 
 			}
 		}
 		if (INSTRUCT_STATE == currentState) {
 			if (e.getX() > 345 && e.getX() < 485 && e.getY() > 895 && e.getY() < 916) {
 				currentState = GAME_STATE;
+				music.stop();
+				music2 = new SimplePlayer("gameMusic.mp3");
 			}
 			
 		}

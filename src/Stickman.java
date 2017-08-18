@@ -41,19 +41,19 @@ public class Stickman extends GameObject {
 
 	void update() {
 		super.update();
-		System.out.println (y + ".");
+		System.out.println (y + "THIS IS THE Y <--------------");
 		if (x >= 225) {
 			speed = speed;
 		}
 		if (rightKey) {
-			System.out.println(speed);
+			//System.out.println(speed);
 			// x = x + speed;
 			x += speed;
 			//System.out.println(y);
 			// System.out.println("Right key");
 		}
 		if (leftKey) {
-			System.out.println(speed);
+			//System.out.println(speed);
 			// x = x - speed;
 			x -= speed;
 			//System.out.println("Left key");
