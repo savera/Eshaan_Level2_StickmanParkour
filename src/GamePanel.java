@@ -18,6 +18,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.JApplet;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javafx.scene.media.Media;
@@ -41,18 +42,24 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	final int GAME_STATE = 1;
 	final int INSTRUCT_STATE = 2;	
 	final int END_STATE = 3;
-
+	final int WIN_STATE = 4;
 	int currentState = MENU_STATE;
+	int winX = 2;
+	int winY = 2;
+	int WinX = 0;
+	int WinY = 241;
+	int stageY = 841;
+	int stageX = 490;
 	Timer timer;
 	Font titleFont;
 	Font titleFont2;
 	Font titleFont3;
 	Stickman stickman;
 	JButton button;
-	SimplePlayer music;
-	SimplePlayer music2;
-	SimplePlayer music3;
-	// Falling_Blocks blocks;
+//	SimplePlayer music;
+//	SimplePlayer music2;
+//	SimplePlayer music3;
+	
 	ObjectManager manager = new ObjectManager();
 	// public static BufferedImage alienImg;
 	public static BufferedImage main2Img;
@@ -63,11 +70,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	GamePanel() {
 		Random random = new Random();
 		init();
-		// blocks = new Falling_Blocks(250, 100, 35, 35);
+		
 		titleFont = new Font("Ariel", Font.PLAIN, 54);
 		titleFont2 = new Font("Ariel", Font.PLAIN, 30);
 		titleFont3 = new Font("Ariel", Font.PLAIN, 25);
-		// for (int i = 0; i < 100; i++) {
+		
 		
 		try {
 			main2Img = ImageIO.read(this.getClass().getResourceAsStream("Main2.jpg"));
@@ -87,28 +94,20 @@ void init(){
 	
  manager = new ObjectManager();
  ObjectManager.initLanes();
- stickman = new Stickman(200, 865, 30, 30);
+ stickman = new Stickman(200, 0, 30, 30);
  manager.addObject(stickman);
 }
 	void startGame() {
 
 		timer.start();
-		music = new SimplePlayer("menuMusic.mp3");
+		//music = new SimplePlayer("menuMusic.mp3");
 		
 		
 		//menuMusic();
 		
 
 	}
-	private void menuMusic() {
-		
-		
-//		String bip = "menuMusic.mp3";
-//		Media hit = new Media(new File(bip).toURI().toString());
-//		MediaPlayer mediaPlayer = new MediaPlayer(hit);
-//		mediaPlayer.play();
-		
-	}
+	
 
 	public void paintComponent(Graphics g) {
 
@@ -123,6 +122,9 @@ void init(){
 		}
 		if (currentState == INSTRUCT_STATE) {
 			drawInstructState(g);
+		}
+		if (currentState == WIN_STATE) {
+			drawWinState(g);
 		}
 	}
 
@@ -168,7 +170,7 @@ void init(){
 			remove(button);
 			button = null;
 		}
-		g.setColor(Color.WHITE);
+		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 900);
 		stickman.draw(g);
 		// blocks.draw(g);
@@ -176,7 +178,7 @@ void init(){
 	}
 
 	void drawEndState(Graphics g) {
-		music2.stop();
+		//music2.stop();
 		//music = new SimplePlayer("endGame.mp3");
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 900);
@@ -241,6 +243,25 @@ void init(){
 
 		
 	}
+	void drawWinState(Graphics g) {
+	WinX += winX;
+if (WinX >= stageX) {
+	WinX =0;
+	WinY += 100;
+	
+}
+if (WinY >= stageY) {
+	WinX = 0;
+	WinY -= 100;
+}
+		//System.out.println("HELLO");
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, 500, 900);
+		
+		g.setFont(titleFont3);
+		g.setColor(Color.BLUE);
+		g.drawString("You Beat this Level", WinX , WinY);
+	}
 //	private void menuMusic() {
 //		
 //		
@@ -268,7 +289,9 @@ void init(){
 	void updateInstructState() {
 
 	}
-
+void updateWinState() {
+	
+}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -279,14 +302,18 @@ void init(){
 		} else if (currentState == END_STATE) {
 			updateEndState();
 		}
-		if (currentState == INSTRUCT_STATE) {
+		else 	if (currentState == INSTRUCT_STATE) {
 			updateInstructState();
 		}
-
+		else if (currentState == WIN_STATE) {
+			updateWinState();
+		}
 		if (stickman.isAlive == false) {
 			currentState = END_STATE;
 		}
-		
+		if (stickman.y < 0) {
+			currentState = WIN_STATE;
+		}
 		repaint();
 
 	}
@@ -301,13 +328,8 @@ void init(){
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		// System.out.println("keyPressed");
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			currentState++;
-			if (currentState > END_STATE) {
-				currentState = MENU_STATE;
-			}
-		}
+		
+
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			stickman.rightKey = true;
@@ -316,13 +338,7 @@ void init(){
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			stickman.leftKey = true;
 		}
-		// else if (e.getKeyCode() == KeyEvent.VK_UP) {
-		// stickman.upkey = true;
-		// }
-
-		// if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-		// currentState = MENU_STATE;
-		// }
+	
 		updateGameState();
 	}
 
@@ -337,12 +353,8 @@ void init(){
 			stickman.rightKey = false;
 
 		}
-		if(MENU_STATE == currentState) {
-			
-		}
-		// if (e.getKeyCode() == KeyEvent.VK_UP) {
-		// stickman.upkey = false;
-		// }
+	
+		
 
 	}
 
@@ -361,8 +373,8 @@ void init(){
 		if (MENU_STATE == currentState) {
 			if (e.getX() > 190 && e.getX() < 290 && e.getY() > 70 && e.getY() < 100) {
 				currentState = GAME_STATE;
-				music.stop();
-				music2 = new SimplePlayer("gameMusic.mp3");
+//				music.stop();
+//				music2 = new SimplePlayer("gameMusic.mp3");
 			}
 		}
 		if (MENU_STATE == currentState) {
@@ -376,15 +388,15 @@ void init(){
 			if (e.getX() > 185 && e.getX() < 301 && e.getY() > 375 && e.getY() < 400) {
 				init();
 				currentState = GAME_STATE;
-				music2 = new SimplePlayer("gameMusic.mp3");
+				//music2 = new SimplePlayer("gameMusic.mp3");
 
 			}
 		}
 		if (INSTRUCT_STATE == currentState) {
 			if (e.getX() > 345 && e.getX() < 485 && e.getY() > 895 && e.getY() < 916) {
 				currentState = GAME_STATE;
-				music.stop();
-				music2 = new SimplePlayer("gameMusic.mp3");
+//				music.stop();
+//				music2 = new SimplePlayer("gameMusic.mp3");
 			}
 			
 		}

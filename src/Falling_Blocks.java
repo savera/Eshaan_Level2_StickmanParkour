@@ -8,9 +8,9 @@ public class Falling_Blocks extends GameObject {
 	boolean isRed;
 	boolean isBlue;
 	boolean isBlack;
-	static float blueProb = 0.98f;
-	static float redProb = 0.70f;
-	static float blackProb = 0.70f;
+	static float blueProb = 100;
+	static float redProb = 0f;
+	static float blackProb = 100f;
 
 	Falling_Blocks(int x, int y, int width, int height, int lane) {
 		super();
@@ -73,7 +73,7 @@ public class Falling_Blocks extends GameObject {
 		} else if (isRed) {
 			g.setColor(Color.RED);
 		} else if (isBlack) {
-			g.setColor(Color.BLACK);
+			g.setColor(Color.LIGHT_GRAY);
 		} else {
 			g.setColor(Color.GRAY);
 		}

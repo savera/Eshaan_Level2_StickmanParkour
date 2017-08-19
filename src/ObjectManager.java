@@ -71,15 +71,7 @@ public class ObjectManager {
 		}
 
 	}
-	private void menuMusic() {
-		
-		
-		AudioClip sound = JApplet.newAudioClip(getClass().getResource("271576__markovujic92__dubstep-loop-perfect-by-mark-w (1).mp3"));
-			
-		sound.play();
-		System.out.println("play");
-		
-	}
+
 	public void checkCollision() {
 		System.out.println(enemySpawnTime);
 		for (int i = 0; i < objects.size(); i++) {
@@ -91,7 +83,7 @@ public class ObjectManager {
 
 					if (stickman.collisionBox.intersects(fallingBlock.collisionBox)) {
 						if (((Falling_Blocks) fallingBlock).isRed) {
-					
+
 							stickman.y -= 6;
 
 						} else {
@@ -100,47 +92,54 @@ public class ObjectManager {
 					}
 					if (stickman instanceof Stickman) {
 
-						if (stickman.collisionBox.intersects(fallingBlock.collisionBox)
-								|| stickman.collisionBox2.intersects(fallingBlock.collisionBox)
-								|| stickman.collisionBox3.intersects(fallingBlock.collisionBox)
-								|| stickman.collisionBox4.intersects(fallingBlock.collisionBox)) {
-							if (!(((Falling_Blocks) fallingBlock).isRed) && !(((Falling_Blocks) fallingBlock).isBlue)
-									&& !(((Falling_Blocks) fallingBlock).isBlack)) {
-								stickman.isAlive = false;
-								
-								// System.out.println("DEAD");
+						if (stickman.collisionBox.intersects(fallingBlock.collisionBox)) {
+							if (((Falling_Blocks) fallingBlock).isBlue) {
+
+								stickman.y -= 6;
+
+							} else {
+
 							}
-						} else {
+						}
+						if (stickman instanceof Stickman) {
+
+							if (stickman.collisionBox.intersects(fallingBlock.collisionBox)
+									|| stickman.collisionBox2.intersects(fallingBlock.collisionBox)
+									|| stickman.collisionBox3.intersects(fallingBlock.collisionBox)
+									|| stickman.collisionBox4.intersects(fallingBlock.collisionBox)) {
+								if (!(((Falling_Blocks) fallingBlock).isRed)
+										&& !(((Falling_Blocks) fallingBlock).isBlue)
+										&& !(((Falling_Blocks) fallingBlock).isBlack)) {
+									stickman.isAlive = false;
+
+									// System.out.println("DEAD");
+								}
+							} else {
+
+							}
+						}
+						if (stickman instanceof Stickman) {
+							if (stickman.y > 220) {
+								enemySpawnTime = 700;
+							}
+							
 
 						}
-					}
-					if (stickman instanceof Stickman) {
-						if (stickman.y > 220) {
-							enemySpawnTime = 700;
+						if (stickman instanceof Stickman) {
+							if (stickman.y <= 375) {
+								enemySpawnTime = 225;
+							} else {
+								enemySpawnTime = enemySpawnTime;
+							}
 						}
-						if(stickman.y > 559) {
-							Falling_Blocks.blackProb = 100;
-							Falling_Blocks.blueProb = 100;
-						}
-						else {
-							Falling_Blocks.blackProb = 0.70f;
-							Falling_Blocks.blueProb = 0.98f;
-						}
+						if ((stickman.collisionBox.intersects(fallingBlock.collisionBox))) {
+							if (((Falling_Blocks) fallingBlock).isBlue) {
+								stickman.y -= 6;
+								((Stickman) stickman).speed += 1;
 
-					}
-					if (stickman instanceof Stickman) {
-						if (stickman.y <= 375) {
-							enemySpawnTime = 225;
-						} else {
-							enemySpawnTime = enemySpawnTime;
-						}
-					}
-					if ((stickman.collisionBox.intersects(fallingBlock.collisionBox))) {
-						if (((Falling_Blocks) fallingBlock).isBlue) {
-							stickman.y -= 6;
-							((Stickman) stickman).speed += 0.25;
+							} else {
 
-						} else {
+							}
 
 						}
 						if ((stickman.collisionBox.intersects(fallingBlock.collisionBox))) {
@@ -150,41 +149,24 @@ public class ObjectManager {
 
 							}
 						}
-					}
-					if (stickman.collisionBox3.intersects(fallingBlock.collisionBox)) {
-						if (((Falling_Blocks) fallingBlock).isRed == false) {
-							stickman.x -= 5;
-							
-						} else {
+						if (stickman.collisionBox3.intersects(fallingBlock.collisionBox)) {
+							if (((Falling_Blocks) fallingBlock).isRed == false) {
+								stickman.x -= 6;
+
+							} else {
+
+							}
 
 						}
+						if (stickman.collisionBox4.intersects(fallingBlock.collisionBox)) {
+							if (((Falling_Blocks) fallingBlock).isRed == false) {
+								stickman.x += 5;
+								// System.out.println("COLLISION");
 
-					}
-					if (stickman.collisionBox4.intersects(fallingBlock.collisionBox)) {
-						if (((Falling_Blocks) fallingBlock).isRed == false) {
-							stickman.x += 5;
-							//System.out.println("COLLISION");
+							} else {
 
-						} else {
-
+							}
 						}
-
-					}
-
-					// if
-					// (stickman.collisionBox6.intersects(fallingBlock.collisionBox))
-					// {
-					// ((Stickman) stickman).setyVelocity(5);
-					// }
-					// else
-					// if(stickman.collisionBox5.intersects(fallingBlock.collisionBox)){
-					// //stickman.y -= 35;
-					// ((Stickman) stickman).onGround = true;
-					//
-					// }
-					else {
-						// ((Stickman) stickman).onGround = false;
-						// ((Stickman) stickman).setGravity(1);
 					}
 				}
 			}
