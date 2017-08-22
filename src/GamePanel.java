@@ -56,9 +56,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	Font titleFont3;
 	Stickman stickman;
 	JButton button;
-//	SimplePlayer music;
-//	SimplePlayer music2;
-//	SimplePlayer music3;
+	SimplePlayer music;
+	SimplePlayer music2;
+	SimplePlayer music3;
 	
 	ObjectManager manager = new ObjectManager();
 	// public static BufferedImage alienImg;
@@ -100,10 +100,10 @@ void init(){
 	void startGame() {
 
 		timer.start();
-		//music = new SimplePlayer("menuMusic.mp3");
+		music = new SimplePlayer("menuMusic.mp3");
 		
 		
-		//menuMusic();
+		
 		
 
 	}
@@ -373,8 +373,8 @@ void updateWinState() {
 		if (MENU_STATE == currentState) {
 			if (e.getX() > 190 && e.getX() < 290 && e.getY() > 70 && e.getY() < 100) {
 				currentState = GAME_STATE;
-//				music.stop();
-//				music2 = new SimplePlayer("gameMusic.mp3");
+				music.stop();
+				music2 = new SimplePlayer("gameMusic.mp3");
 			}
 		}
 		if (MENU_STATE == currentState) {
@@ -388,15 +388,15 @@ void updateWinState() {
 			if (e.getX() > 185 && e.getX() < 301 && e.getY() > 375 && e.getY() < 400) {
 				init();
 				currentState = GAME_STATE;
-				//music2 = new SimplePlayer("gameMusic.mp3");
+				music2 = new SimplePlayer("gameMusic.mp3");
 
 			}
 		}
 		if (INSTRUCT_STATE == currentState) {
 			if (e.getX() > 345 && e.getX() < 485 && e.getY() > 895 && e.getY() < 916) {
 				currentState = GAME_STATE;
-//				music.stop();
-//				music2 = new SimplePlayer("gameMusic.mp3");
+				music.stop();
+				music2 = new SimplePlayer("gameMusic.mp3");
 			}
 			
 		}
