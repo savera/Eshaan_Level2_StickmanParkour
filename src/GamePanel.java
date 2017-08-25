@@ -50,6 +50,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	int WinY = 241;
 	int stageY = 841;
 	int stageX = 490;
+	int score = 0;
+	float sec = 0;
+	int highScore;
 	Timer timer;
 	Font titleFont;
 	Font titleFont2;
@@ -91,10 +94,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 	}
 void init(){
-	
+	 score = 0;
+	 sec = 0;
  manager = new ObjectManager();
  ObjectManager.initLanes();
- stickman = new Stickman(200, 0, 30, 30);
+ stickman = new Stickman(200, 865, 30, 30);
  manager.addObject(stickman);
 }
 	void startGame() {
@@ -170,15 +174,25 @@ void init(){
 			remove(button);
 			button = null;
 		}
+		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 900);
 		stickman.draw(g);
 		// blocks.draw(g);
 		manager.draw(g);
+		sec += 0.1;
+		score = Math.round(sec);
+		g.drawString("Score: "+score  , 30, 30);
+		g.drawString("Highscore: " + highScore , 30, 60);
+		//System.out.println(score +=1);
+
+		if (score > highScore ) {
+			highScore = score;
+		}
 	}
 
 	void drawEndState(Graphics g) {
-		//music2.stop();
+		music2.stop();
 		//music = new SimplePlayer("endGame.mp3");
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 900);
@@ -195,7 +209,17 @@ void init(){
 		g.drawString("Restart", 190, 375);
 		g.setFont(titleFont2);
 		g.setColor(Color.BLACK);
+		
+//		if (score > highScore ) {
+//			highScore = score;
+//		}
+		g.setFont(titleFont2);
+		g.setColor(Color.blue);
+		g.drawString("Your score was " +score + ".", 100, 100);
 
+		g.setFont(titleFont2);
+		g.setColor(Color.RED);
+				g.drawString("The highscore is " + highScore + ".", 90, 150);
 	}
 
 	void drawInstructState(Graphics g) {
@@ -210,7 +234,7 @@ void init(){
 		g.setColor(Color.WHITE);
 		g.drawString("Try to get to the top of the screen", 10, 110);
 		g.setColor(Color.GRAY);
-		g.drawString("GRAY BLOCKS: Kills the character", 10, 140);
+		g.drawString("GRAY BLOCKS: Kill the character", 10, 140);
 
 		g.setColor(Color.RED);
 		g.drawString("RED BLOCKS: Moves the character up ", 10, 170);
@@ -221,16 +245,21 @@ void init(){
 		g.drawString("one level, as well as speeds up the", 10, 260);
 		g.drawString("character's movement", 10, 290);
 
+		g.setColor(Color.WHITE);
+		g.drawString("WHITE BLOCKS: Subtracts spawn time ", 10, 320);
+		g.drawString("for all blocks", 10, 350);
+		
+		
 		g.setFont(titleFont);
 		g.setColor(Color.MAGENTA);
-		g.drawString("How to Play", 30, 380);
+		g.drawString("How to Play", 30, 400);
 		
 		g.setFont(titleFont3); 
-		g.setColor(Color.WHITE);
-		g.drawString("Use the left <-- arrow key to move to", 10, 410);
-		g.drawString("the left", 10, 440);
-		g.drawString("Use the right --> arrow key to move to", 10, 470);
-		g.drawString("the right", 10, 500);
+		g.setColor(Color.ORANGE);
+		g.drawString("Use the left <-- arrow key to move to", 10, 430);
+		g.drawString("the left", 10, 460);
+		g.drawString("Use the right --> arrow key to move to", 10, 490);
+		g.drawString("the right", 10, 520);
 		
 		
 		//g.fillRect(x, y, width, height);
@@ -244,6 +273,8 @@ void init(){
 		
 	}
 	void drawWinState(Graphics g) {
+
+		
 	WinX += winX;
 if (WinX >= stageX) {
 	WinX =0;
@@ -254,13 +285,32 @@ if (WinY >= stageY) {
 	WinX = 0;
 	WinY -= 100;
 }
+music2.stop();
 		//System.out.println("HELLO");
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 900);
 		
 		g.setFont(titleFont3);
+		g.setColor(new Color(0, 255, 255));
+		g.drawString("You Win :D", WinX , WinY);
+		g.setFont(titleFont2);
+		g.setColor(Color.CYAN);
+		g.drawString("Your score was " +score + ".", 100, 100);
+	
+		
+//		if (score > highScore ) {
+//			highScore = score;
+//		}
+		g.setFont(titleFont2);
+		g.setColor(Color.RED);
+		g.drawString("The highscore is " + highScore + ".", 90, 150);
+		
 		g.setColor(Color.BLUE);
-		g.drawString("You Beat this Level", WinX , WinY);
+		g.fillRect(345, 870, 140, 25);
+		
+		g.setColor(Color.WHITE);
+		g.setFont(titleFont2);
+		g.drawString("Start -->", 350, 895);
 	}
 //	private void menuMusic() {
 //		
@@ -276,7 +326,7 @@ if (WinY >= stageY) {
 	}
 
 	void updateGameState() {
-	
+
 		manager.checkCollision();
 		manager.update();
 		manager.manageEnemies();
@@ -374,7 +424,7 @@ void updateWinState() {
 			if (e.getX() > 190 && e.getX() < 290 && e.getY() > 70 && e.getY() < 100) {
 				currentState = GAME_STATE;
 				music.stop();
-				music2 = new SimplePlayer("gameMusic.mp3");
+				music2 = new SimplePlayer("Tetris.mp3");
 			}
 		}
 		if (MENU_STATE == currentState) {
@@ -388,7 +438,7 @@ void updateWinState() {
 			if (e.getX() > 185 && e.getX() < 301 && e.getY() > 375 && e.getY() < 400) {
 				init();
 				currentState = GAME_STATE;
-				music2 = new SimplePlayer("gameMusic.mp3");
+				music2 = new SimplePlayer("Tetris.mp3");
 
 			}
 		}
@@ -396,7 +446,15 @@ void updateWinState() {
 			if (e.getX() > 345 && e.getX() < 485 && e.getY() > 895 && e.getY() < 916) {
 				currentState = GAME_STATE;
 				music.stop();
-				music2 = new SimplePlayer("gameMusic.mp3");
+				music2 = new SimplePlayer("Tetris.mp3");
+			}
+			
+		}
+		if (WIN_STATE == currentState) {
+			if (e.getX() > 345 && e.getX() < 485 && e.getY() > 895 && e.getY() < 916) {
+				currentState = GAME_STATE;
+				init();
+				music2 = new SimplePlayer("Tetris.mp3");
 			}
 			
 		}
