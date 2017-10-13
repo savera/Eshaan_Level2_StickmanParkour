@@ -1,6 +1,7 @@
 
 import java.applet.AudioClip;
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -21,10 +22,6 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-// menu page music
-//http://freesound.org/people/MarkoVujic92/sounds/271576/
 
 //http://freesound.org/people/B_Lamerichs/sounds/264057/
 //game over music
