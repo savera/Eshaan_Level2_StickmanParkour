@@ -37,7 +37,6 @@ public class Falling_Blocks extends GameObject {
 	}
 	void update() {
 		super.update();
-		// System.out.println(x + "." + y + ".");
 		if (!placed) {
 			y++;
 

@@ -1,6 +1,4 @@
 import java.io.File;
-import java.io.FileInputStream;
-
 import jaco.mp3.player.MP3Player;
 
 public class SimplePlayer {
@@ -9,8 +7,6 @@ public class SimplePlayer {
 	public SimplePlayer(String song) {
 
 		try {
-
-			FileInputStream fis = new FileInputStream(song);
 			playMP3 = new MP3Player(new File(song));
 
 			playMP3.play();

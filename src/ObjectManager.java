@@ -1,10 +1,7 @@
 
-import java.applet.AudioClip;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
-
-import javax.swing.JApplet;
 
 public class ObjectManager {
 	ArrayList<GameObject> objects;
@@ -43,8 +40,6 @@ public class ObjectManager {
 			GameObject o = objects.get(i);
 			o.update();
 		}
-
-		// purgeObjects();
 	}
 
 	public void draw(Graphics g) {
@@ -55,16 +50,8 @@ public class ObjectManager {
 		}
 	}
 
-	private void purgeObjects() {
-		for (int i = 0; i < objects.size(); i++) {
-			if (!objects.get(i).isAlive) {
-				objects.remove(i);
-			}
-		}
-	}
-
 	public void manageEnemies() {
-		int enemyLane = new Random().nextInt(Stickman_Parkour.width) / 35;
+		int enemyLane = new Random().nextInt(StickmanParkour.width) / 35;
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
 			addObject(new Falling_Blocks(enemyLane * 35, 0, 35, 35, enemyLane));
 			enemyTimer = System.currentTimeMillis();
@@ -91,16 +78,6 @@ public class ObjectManager {
 						}
 					}
 					if (stickman instanceof Stickman) {
-
-//						if (stickman.collisionBox.intersects(fallingBlock.collisionBox)) {
-//							if (((Falling_Blocks) fallingBlock).isBlue) {
-//
-//								stickman.y -= 6;
-//
-//							} else {
-//
-//							}
-//						}
 						if (stickman instanceof Stickman) {
 
 							if (stickman.collisionBox.intersects(fallingBlock.collisionBox)
@@ -111,18 +88,12 @@ public class ObjectManager {
 										&& !(((Falling_Blocks) fallingBlock).isBlue) && !(((Falling_Blocks) fallingBlock).isBlack)) {
 									stickman.isAlive = false;
 
-									// System.out.println("DEAD");
 								}
 							} else {
 
 							}
 						}
-						if (stickman instanceof Stickman) {
-//							if (stickman.y > 220) {
-//								enemySpawnTime = 700;
-//							}
-
-						}
+						
 						if (stickman instanceof Stickman) {
 							if (stickman.y <= 375) {
 								enemySpawnTime = 225;
@@ -156,7 +127,6 @@ public class ObjectManager {
 						if (stickman.collisionBox4.intersects(fallingBlock.collisionBox)) {
 							if (((Falling_Blocks) fallingBlock).isRed == false && ((Falling_Blocks) fallingBlock).isBlue == false && ((Falling_Blocks) fallingBlock).isBlack == false) {
 								stickman.x += 6;
-								// System.out.println("COLLISION");
 
 							} else {
 
