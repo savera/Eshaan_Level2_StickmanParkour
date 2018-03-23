@@ -2,46 +2,47 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
-public class Falling_Blocks extends GameObject {
+public class FallingBlocks extends GameObject {
+
 	boolean left = true;
-	boolean placed = false;
+	boolean isPlaced = false;
 	boolean isRed;
 	boolean isBlue;
 	boolean isBlack;
 
-	Falling_Blocks(int x, int y, int width, int height, int lane) {
+	FallingBlocks(int x, int y, int width, int height, int lane) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.height = height;
 		this.width = width;
 		this.lane = lane;
+
 		if (Math.random() > 0.96) {
-			 	
-			  			isRed = false;
-			  			isBlue = false;
-			  			isBlack = true;
-			  			}
-			 		 else if (Math.random() > 0.96) {
-			 		
-			  			isRed = false;
-			  			isBlue = true;
-			  			isBlack = false;
-			 		 } 
-			 			
-			 	 else if (Math.random() > 0.7) {
-			 		isBlack = false;
-			 		isBlue = false;
-			  		isRed = true;
-			 	}
+			isRed = false;
+			isBlue = false;
+			isBlack = true;
+		} 
+		if (Math.random() > 0.96) {
+			isRed = false;
+			isBlue = true;
+			isBlack = false;
+		}
+		if (Math.random() > 0.7) {
+			isBlack = false;
+			isBlue = false;
+			isRed = true;
+		}
 	}
+
 	void update() {
 		super.update();
-		if (!placed) {
+		if (!isPlaced) {
 			y++;
 
 			if (x <= 0) {
 				left = false;
+				System.out.println("hello");
 			}
 			if (x >= 0) {
 				left = true;
@@ -54,7 +55,7 @@ public class Falling_Blocks extends GameObject {
 
 			if (y > ObjectManager.lanes[lane]) {
 				y = ObjectManager.lanes[lane];
-				placed = true;
+				isPlaced = true;
 				ObjectManager.lanes[lane] -= height;
 			}
 		}
@@ -62,7 +63,6 @@ public class Falling_Blocks extends GameObject {
 	}
 
 	public void draw(Graphics g) {
-
 		if (isBlue) {
 			g.setColor(Color.BLUE);
 		} else if (isRed) {

@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ObjectManager {
+	
 	ArrayList<GameObject> objects;
+	
+	StickmanParkour stickmanParkour = new StickmanParkour();
 
 	private int score = 0;
 
@@ -51,9 +54,9 @@ public class ObjectManager {
 	}
 
 	public void manageEnemies() {
-		int enemyLane = new Random().nextInt(StickmanParkour.width) / 35;
+		int enemyLane = new Random().nextInt(stickmanParkour.width) / 35;
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
-			addObject(new Falling_Blocks(enemyLane * 35, 0, 35, 35, enemyLane));
+			addObject(new FallingBlocks(enemyLane * 35, 0, 35, 35, enemyLane));
 			enemyTimer = System.currentTimeMillis();
 		}
 
@@ -69,7 +72,7 @@ public class ObjectManager {
 				if (stickman instanceof Stickman) {
 
 					if (stickman.collisionBox.intersects(fallingBlock.collisionBox)) {
-						if (((Falling_Blocks) fallingBlock).isRed) {
+						if (((FallingBlocks) fallingBlock).isRed) {
 
 							stickman.y -= 6;
 
@@ -84,8 +87,8 @@ public class ObjectManager {
 									|| stickman.collisionBox2.intersects(fallingBlock.collisionBox)
 									|| stickman.collisionBox3.intersects(fallingBlock.collisionBox)
 									|| stickman.collisionBox4.intersects(fallingBlock.collisionBox)) {
-								if (!(((Falling_Blocks) fallingBlock).isRed)
-										&& !(((Falling_Blocks) fallingBlock).isBlue) && !(((Falling_Blocks) fallingBlock).isBlack)) {
+								if (!(((FallingBlocks) fallingBlock).isRed)
+										&& !(((FallingBlocks) fallingBlock).isBlue) && !(((FallingBlocks) fallingBlock).isBlack)) {
 									stickman.isAlive = false;
 
 								}
@@ -100,7 +103,7 @@ public class ObjectManager {
 							} 
 						}
 						if ((stickman.collisionBox.intersects(fallingBlock.collisionBox))) {
-							if (((Falling_Blocks) fallingBlock).isBlue) {
+							if (((FallingBlocks) fallingBlock).isBlue) {
 								stickman.y -= 6;
 								((Stickman) stickman).speed += 0.3;
 
@@ -110,13 +113,13 @@ public class ObjectManager {
 
 						}
 						if ((stickman.collisionBox.intersects(fallingBlock.collisionBox))) {
-							if (((Falling_Blocks) fallingBlock).isBlack) {
+							if (((FallingBlocks) fallingBlock).isBlack) {
 								enemySpawnTime -= 10;
 								System.out.println("hi");
 							}
 						}
 						if (stickman.collisionBox3.intersects(fallingBlock.collisionBox)) {
-							if (((Falling_Blocks) fallingBlock).isRed == false && ((Falling_Blocks) fallingBlock).isBlue == false && ((Falling_Blocks) fallingBlock).isBlack == false) {
+							if (((FallingBlocks) fallingBlock).isRed == false && ((FallingBlocks) fallingBlock).isBlue == false && ((FallingBlocks) fallingBlock).isBlack == false) {
 								stickman.x -= 6;
 
 							} else {
@@ -125,7 +128,7 @@ public class ObjectManager {
 
 						}
 						if (stickman.collisionBox4.intersects(fallingBlock.collisionBox)) {
-							if (((Falling_Blocks) fallingBlock).isRed == false && ((Falling_Blocks) fallingBlock).isBlue == false && ((Falling_Blocks) fallingBlock).isBlack == false) {
+							if (((FallingBlocks) fallingBlock).isRed == false && ((FallingBlocks) fallingBlock).isBlue == false && ((FallingBlocks) fallingBlock).isBlack == false) {
 								stickman.x += 6;
 
 							} else {

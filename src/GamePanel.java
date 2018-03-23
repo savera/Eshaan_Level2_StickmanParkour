@@ -17,6 +17,7 @@ import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseListener {
+
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int INSTRUCT_STATE = 2;
@@ -27,8 +28,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	int winY = 2;
 	int WinX = 0;
 	int WinY = 241;
-	int stageY = 841;
-	int stageX = 490;
+	int screenY = 841;
+	int screenX = 490;
 	int score = 0;
 	float sec = 0;
 	int highScore;
@@ -38,9 +39,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	Font titleFont3;
 	Stickman stickman;
 	JButton button;
-	SimplePlayer music;
-	SimplePlayer music2;
-	SimplePlayer music3;
+	SongPlayer music;
+	SongPlayer music2;
+	SongPlayer music3;
 
 	ObjectManager manager = new ObjectManager();
 	public static BufferedImage main2Img;
@@ -59,22 +60,23 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		}
 
 		timer = new Timer(1000 / 60, this);
-
 	}
 
 	void init() {
+
 		score = 0;
 		sec = 0;
 		manager = new ObjectManager();
 		ObjectManager.initLanes();
 		stickman = new Stickman(200, 865, 30, 30);
 		manager.addObject(stickman);
+
 	}
 
 	void startGame() {
 
 		timer.start();
-		music = new SimplePlayer("menuMusic.mp3");
+		music = new SongPlayer("menuMusic.mp3");
 
 	}
 
@@ -95,6 +97,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		if (currentState == WIN_STATE) {
 			drawWinState(g);
 		}
+
 	}
 
 	void drawMenuState(Graphics g) {
@@ -226,16 +229,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	void drawWinState(Graphics g) {
 
 		WinX += winX;
-		if (WinX >= stageX) {
+		if (WinX >= screenX) {
 			WinX = 0;
 			WinY += 100;
 
 		}
-		if (WinY >= stageY) {
+		if (WinY >= screenY) {
 			WinX = 0;
 			WinY -= 100;
 		}
+
 		music2.stop();
+
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 900);
 
@@ -258,10 +263,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.drawString("Start -->", 350, 895);
 	}
 
-	void updateMenuState() {
-
-	}
-
 	void updateGameState() {
 
 		manager.checkCollision();
@@ -269,32 +270,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		manager.manageEnemies();
 	}
 
-	void updateEndState() {
-
-	}
-
-	void updateInstructState() {
-
-	}
-
-	void updateWinState() {
-
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if (currentState == MENU_STATE) {
-			updateMenuState();
-		} else if (currentState == GAME_STATE) {
+		if (currentState == GAME_STATE) {
 			updateGameState();
-		} else if (currentState == END_STATE) {
-			updateEndState();
-		} else if (currentState == INSTRUCT_STATE) {
-			updateInstructState();
-		} else if (currentState == WIN_STATE) {
-			updateWinState();
 		}
+
 		if (stickman.isAlive == false) {
 			currentState = END_STATE;
 		}
@@ -307,18 +289,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			stickman.rightKey = true;
+			stickman.rightKeyPressed = true;
 
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			stickman.leftKey = true;
+			stickman.leftKeyPressed = true;
 		}
 
 		updateGameState();
@@ -326,11 +307,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			stickman.leftKey = false;
+			stickman.leftKeyPressed = false;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			stickman.rightKey = false;
+			stickman.rightKeyPressed = false;
 
 		}
 
@@ -343,44 +325,40 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println(e.getX());
-		System.out.println(e.getY());
 
 		if (MENU_STATE == currentState) {
 			if (e.getX() > 190 && e.getX() < 290 && e.getY() > 70 && e.getY() < 100) {
 				currentState = GAME_STATE;
 				music.stop();
-				music2 = new SimplePlayer("Tetris.mp3");
+				music2 = new SongPlayer("Tetris.mp3");
 			}
-		}
-		if (MENU_STATE == currentState) {
 			if (e.getX() > 150 && e.getX() < 340 && e.getY() > 135 && e.getY() < 160) {
-
 				currentState = INSTRUCT_STATE;
-
 			}
 		}
+
 		if (END_STATE == currentState) {
 			if (e.getX() > 185 && e.getX() < 301 && e.getY() > 375 && e.getY() < 400) {
 				init();
 				currentState = GAME_STATE;
-				music2 = new SimplePlayer("Tetris.mp3");
+				music2 = new SongPlayer("Tetris.mp3");
 
 			}
 		}
+
 		if (INSTRUCT_STATE == currentState) {
 			if (e.getX() > 345 && e.getX() < 485 && e.getY() > 895 && e.getY() < 916) {
 				currentState = GAME_STATE;
 				music.stop();
-				music2 = new SimplePlayer("Tetris.mp3");
+				music2 = new SongPlayer("Tetris.mp3");
 			}
-
 		}
+
 		if (WIN_STATE == currentState) {
 			if (e.getX() > 345 && e.getX() < 485 && e.getY() > 895 && e.getY() < 916) {
 				currentState = GAME_STATE;
 				init();
-				music2 = new SimplePlayer("Tetris.mp3");
+				music2 = new SongPlayer("Tetris.mp3");
 			}
 
 		}

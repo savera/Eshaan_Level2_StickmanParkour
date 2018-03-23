@@ -9,9 +9,10 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class StickmanParkour extends JPanel implements ActionListener, KeyListener {
+	
 	GamePanel panel;
 	JFrame frame;
-	static int width = 490;
+	int width = 490;
 	int height = 920;
 
 	StickmanParkour() {
@@ -26,9 +27,9 @@ public class StickmanParkour extends JPanel implements ActionListener, KeyListen
 
 	void setup() {
 		frame.add(panel);
-		frame.addKeyListener(panel);
 		frame.setVisible(true);
 		frame.setSize(width, height);
+		frame.addKeyListener(panel);
 		frame.addMouseListener(panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel.startGame();

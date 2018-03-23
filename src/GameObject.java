@@ -3,10 +3,6 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class GameObject {
-	GameObject() {
-		collisionBox.setBounds(x, y, width, height);
-
-	}
 
 	int x;
 	int y;
@@ -21,6 +17,10 @@ public class GameObject {
 	Rectangle collisionBox5 = new Rectangle();
 	Rectangle collisionBox6 = new Rectangle();
 
+	GameObject() {
+		collisionBox.setBounds(x, y, width, height);
+	}
+
 	void update() {
 		collisionBox.setBounds(x, y, width, height);
 		collisionBox2.setBounds(x + 5, y, width - 10, height - 25);
@@ -28,7 +28,6 @@ public class GameObject {
 		collisionBox4.setBounds(x - 5, y, width - 25, height - 10);
 		collisionBox5.setBounds(x, y + 30, width, height - 25);
 		collisionBox6.setBounds(x, y + 20, width, height - 25);
-
 	}
 
 	public void draw(Graphics g) {

@@ -1,14 +1,12 @@
 import java.io.File;
 import jaco.mp3.player.MP3Player;
 
-public class SimplePlayer {
+public class SongPlayer {
 	MP3Player playMP3;
 
-	public SimplePlayer(String song) {
-
+	public SongPlayer(String song) {
 		try {
 			playMP3 = new MP3Player(new File(song));
-
 			playMP3.play();
 
 		} catch (Exception e) {
