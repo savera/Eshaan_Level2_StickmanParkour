@@ -17,7 +17,10 @@ public class FallingBlocks extends GameObject {
 		this.height = height;
 		this.width = width;
 		this.lane = lane;
+		coloringBlocks();
+	}
 
+	private void coloringBlocks() {
 		if (Math.random() > 0.96) {
 			isRed = false;
 			isBlue = false;
@@ -40,17 +43,8 @@ public class FallingBlocks extends GameObject {
 		if (!isPlaced) {
 			y++;
 
-			if (x <= 0) {
-				left = false;
-				System.out.println("hello");
-			}
-			if (x >= 0) {
-				left = true;
-			}
-
-			if (left) {
+			if (checkingLeft()) {
 				y = y + new Random().nextInt(10);
-
 			}
 
 			if (y > ObjectManager.lanes[lane]) {
@@ -59,7 +53,16 @@ public class FallingBlocks extends GameObject {
 				ObjectManager.lanes[lane] -= height;
 			}
 		}
+	}
 
+	private boolean checkingLeft() {
+		if (x <= 0) {
+			left = false;
+		}
+		if (x >= 0) {
+			left = true;
+		}
+		return left;
 	}
 
 	public void draw(Graphics g) {

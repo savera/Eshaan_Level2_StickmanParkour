@@ -9,7 +9,8 @@ public class GameObject {
 	int width;
 	int height;
 	int lane;
-	public boolean isAlive = true;
+	boolean isAlive = true;
+	
 	Rectangle collisionBox = new Rectangle();
 	Rectangle collisionBox2 = new Rectangle();
 	Rectangle collisionBox3 = new Rectangle();
@@ -34,4 +35,5 @@ public class GameObject {
 		g.setColor(Color.black);
 		g.fillRect(x, y, width, height);
 	}
+	
 }

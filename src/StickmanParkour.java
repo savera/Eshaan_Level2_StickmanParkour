@@ -12,8 +12,9 @@ public class StickmanParkour extends JPanel implements ActionListener, KeyListen
 	
 	GamePanel panel;
 	JFrame frame;
-	int width = 490;
+	static int width = 490;
 	int height = 920;
+	
 
 	StickmanParkour() {
 		panel = new GamePanel();
@@ -22,10 +23,11 @@ public class StickmanParkour extends JPanel implements ActionListener, KeyListen
 	}
 
 	public static void main(String[] args) {
-		new StickmanParkour();
+		 new StickmanParkour();
 	}
 
 	void setup() {
+		
 		frame.add(panel);
 		frame.setVisible(true);
 		frame.setSize(width, height);

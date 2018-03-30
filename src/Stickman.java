@@ -9,11 +9,11 @@ public class Stickman extends GameObject {
 
 	Stickman(int x, int y, int height, int width) {
 		super();
-		speed = 5;
 		this.x = x;
 		this.y = y;
 		this.height = height;
 		this.width = width;
+		speed = 5;
 	}
 
 	void update() {

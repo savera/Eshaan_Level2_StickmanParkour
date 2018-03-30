@@ -30,8 +30,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	int WinY = 241;
 	int screenY = 841;
 	int screenX = 490;
-	int score = 0;
-	float sec = 0;
+	int score;
+	float sec;
 	int highScore;
 	Timer timer;
 	Font titleFont;
@@ -43,7 +43,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	SongPlayer music2;
 	SongPlayer music3;
 
-	ObjectManager manager = new ObjectManager();
+	ObjectManager manager;
 	public static BufferedImage main2Img;
 
 	GamePanel() {
