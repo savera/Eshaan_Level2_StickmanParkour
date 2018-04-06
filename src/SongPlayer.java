@@ -6,7 +6,7 @@ public class SongPlayer {
 
 	public SongPlayer(String song) {
 		try {
-			playMP3 = new MP3Player(new File(song));
+			playMP3 = new MP3Player(new File(this.getClass().getResource(song).getFile()));
 			playMP3.play();
 
 		} catch (Exception e) {
