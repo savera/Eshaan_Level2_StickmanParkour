@@ -69,11 +69,8 @@ public class ObjectManager {
 
 					if (stickman.collisionBox.intersects(fallingBlock.collisionBox)) {
 						if (((FallingBlocks) fallingBlock).isRed) {
-
 							stickman.y -= 6;
-
 						}
-
 					}
 					if (stickman instanceof Stickman) {
 						if (stickman instanceof Stickman) {
