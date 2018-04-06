@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 @SuppressWarnings("serial")
-public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseListener {
+public class GamePanel extends JPanel {
 
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
@@ -44,6 +44,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	SongPlayer music3;
 
 	ObjectManager manager;
+	private Listener listener;
 	public static BufferedImage main2Img;
 
 	GamePanel() {
@@ -59,13 +60,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 			e.printStackTrace();
 		}
 
-		timer = new Timer(1000 / 60, this);
+		timer = new Timer(1000 / 60, this.listener);
+	}
+
+	public Listener getListener() {
+		return listener;
 	}
 
 	void init() {
 
 		score = 0;
 		sec = 0;
+		this.listener = new Listener();
 		manager = new ObjectManager();
 		ObjectManager.initLanes();
 		stickman = new Stickman(200, 865, 30, 30);
@@ -270,112 +276,92 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		manager.manageEnemies();
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
+	class Listener extends ListenerAdapter {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
 
-		if (currentState == GAME_STATE) {
+			if (currentState == GAME_STATE) {
+				updateGameState();
+			}
+
+			if (stickman.isAlive == false) {
+				currentState = END_STATE;
+			}
+			if (stickman.y < 0) {
+				currentState = WIN_STATE;
+			}
+			repaint();
+
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+
+			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+				stickman.rightKeyPressed = true;
+
+			}
+			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+				stickman.leftKeyPressed = true;
+			}
+
 			updateGameState();
 		}
 
-		if (stickman.isAlive == false) {
-			currentState = END_STATE;
-		}
-		if (stickman.y < 0) {
-			currentState = WIN_STATE;
-		}
-		repaint();
+		@Override
+		public void keyReleased(KeyEvent e) {
 
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			stickman.rightKeyPressed = true;
-
-		}
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			stickman.leftKeyPressed = true;
-		}
-
-		updateGameState();
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			stickman.leftKeyPressed = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			stickman.rightKeyPressed = false;
-
-		}
-
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-
-		if (MENU_STATE == currentState) {
-			if (e.getX() > 190 && e.getX() < 290 && e.getY() > 70 && e.getY() < 100) {
-				currentState = GAME_STATE;
-				music.stop();
-				music2 = new SongPlayer("Tetris.mp3");
+			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+				stickman.leftKeyPressed = false;
 			}
-			if (e.getX() > 150 && e.getX() < 340 && e.getY() > 135 && e.getY() < 160) {
-				currentState = INSTRUCT_STATE;
+			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+				stickman.rightKeyPressed = false;
+
 			}
+
 		}
 
-		if (END_STATE == currentState) {
-			if (e.getX() > 185 && e.getX() < 301 && e.getY() > 375 && e.getY() < 400) {
-				init();
-				currentState = GAME_STATE;
-				music2 = new SongPlayer("Tetris.mp3");
+		@Override
+		public void mousePressed(MouseEvent e) {
+
+			if (MENU_STATE == currentState) {
+				if (e.getX() > 190 && e.getX() < 290 && e.getY() > 70 && e.getY() < 100) {
+					currentState = GAME_STATE;
+					music.stop();
+					music2 = new SongPlayer("Tetris.mp3");
+				}
+				if (e.getX() > 150 && e.getX() < 340 && e.getY() > 135 && e.getY() < 160) {
+					currentState = INSTRUCT_STATE;
+				}
+			}
+
+			if (END_STATE == currentState) {
+				if (e.getX() > 185 && e.getX() < 301 && e.getY() > 375 && e.getY() < 400) {
+					init();
+					currentState = GAME_STATE;
+					music2 = new SongPlayer("Tetris.mp3");
+
+				}
+			}
+
+			if (INSTRUCT_STATE == currentState) {
+				if (e.getX() > 345 && e.getX() < 485 && e.getY() > 895 && e.getY() < 916) {
+					currentState = GAME_STATE;
+					music.stop();
+					music2 = new SongPlayer("Tetris.mp3");
+				}
+			}
+
+			if (WIN_STATE == currentState) {
+				if (e.getX() > 345 && e.getX() < 485 && e.getY() > 895 && e.getY() < 916) {
+					currentState = GAME_STATE;
+					init();
+					music2 = new SongPlayer("Tetris.mp3");
+				}
 
 			}
 		}
 
-		if (INSTRUCT_STATE == currentState) {
-			if (e.getX() > 345 && e.getX() < 485 && e.getY() > 895 && e.getY() < 916) {
-				currentState = GAME_STATE;
-				music.stop();
-				music2 = new SongPlayer("Tetris.mp3");
-			}
-		}
-
-		if (WIN_STATE == currentState) {
-			if (e.getX() > 345 && e.getX() < 485 && e.getY() > 895 && e.getY() < 916) {
-				currentState = GAME_STATE;
-				init();
-				music2 = new SongPlayer("Tetris.mp3");
-			}
-
-		}
 	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-
-	}
-
 }
