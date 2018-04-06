@@ -59,7 +59,6 @@ public class ObjectManager {
 	}
 
 	public void checkCollision() {
-		System.out.println(enemySpawnTime);
 		for (int i = 0; i < gameObjects.size(); i++) {
 			for (int j = i + 1; j < gameObjects.size(); j++) {
 				GameObject stickman = gameObjects.get(i);
@@ -100,7 +99,6 @@ public class ObjectManager {
 						if ((stickman.collisionBox.intersects(fallingBlock.collisionBox))) {
 							if (((FallingBlocks) fallingBlock).isBlack) {
 								enemySpawnTime -= 10;
-								System.out.println("hi");
 							}
 						}
 						if (stickman.collisionBox3.intersects(fallingBlock.collisionBox)) {
