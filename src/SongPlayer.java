@@ -1,22 +1,34 @@
-import java.io.File;
-import jaco.mp3.player.MP3Player;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.advanced.AdvancedPlayer;
+
 
 public class SongPlayer {
-	MP3Player playMP3;
+    private AdvancedPlayer playMP3;
 
-	public SongPlayer(String song) {
-		try {
-			playMP3 = new MP3Player(new File(this.getClass().getResource(song).toURI()));
-			playMP3.play();
+    SongPlayer(String song) {
+        try {
+            playMP3 = new AdvancedPlayer(SongPlayer.class.getResourceAsStream(song));
 
-		} catch (Exception e) {
-			e.printStackTrace();
+            Runnable task = () -> {
+                try {
+                    playMP3.play();
+                    playMP3.close();
+                } catch (JavaLayerException e) {
+                    e.printStackTrace();
+                }
+            };
+
+            Thread thread = new Thread(task);
+            thread.start();
+        }
+        catch(Exception exc){
+            exc.printStackTrace();
+            System.out.format("Failed to play the file: %s.\n", song);
 		}
 	}
 
 	void stop() {
-		playMP3.pause();
-
+	    playMP3.close();
 	}
 
 }
