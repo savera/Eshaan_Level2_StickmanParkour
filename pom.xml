@@ -45,13 +45,4 @@
 		<url>https://github.com/savera/Eshaan_Level2_StickmanParkour</url>
 		<developerConnection>savera</developerConnection>
 	</scm>
-	<dependencies>
-		<dependency>
-			<groupId>net.sourceforge</groupId>
-			<artifactId>jacomp3player</artifactId>
-			<version>0.9.3</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/resources/jaco-mp3-player-0.9.3.jar</systemPath>
-		</dependency>
-	</dependencies>
 </project>

@@ -156,7 +156,9 @@ public class GamePanel extends JPanel {
 	}
 
 	void drawEndState(Graphics g) {
+		if(music2 != null) {
 		music2.stop();
+		}
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 900);
 
